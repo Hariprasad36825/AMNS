@@ -4,7 +4,11 @@
   "description": "Alumni management and networking system",
   "main": "server.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "jest": {
+    "collectCoverage": true
   },
   "author": "",
   "license": "ISC",
