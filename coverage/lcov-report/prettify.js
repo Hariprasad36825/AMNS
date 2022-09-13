@@ -888,11 +888,7 @@ window.PR_SHOULD_USE_CONTINUATION = true
             if (af) {
               Q(aj, af)
             }
-            S = {
-              langExtension: ah,
-              sourceNode: aj,
-              numberLines: af,
-            }
+            S = { langExtension: ah, sourceNode: aj, numberLines: af }
             d(S)
           }
         }
