@@ -1,4 +1,2 @@
-const sampleFunc = () => {
-  return "hello world";
-};
-module.exports = sampleFunc;
+const sampleFunc = () => 'hello world'
+module.exports = sampleFunc
