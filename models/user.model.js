@@ -1,6 +1,15 @@
 import { Schema, model } from 'mongoose'
 
+const CounterSchema = Schema({
+  _id: { type: String, required: true },
+  seq: { type: Number, default: 0 }
+})
+const counter = model('counter', CounterSchema)
+
 const userSchema = new Schema({
+  id: {
+    type: Number
+  },
   username: {
     type: String,
     required: true,
@@ -38,6 +47,15 @@ const userSchema = new Schema({
   tags: {
     type: [String]
   }
+})
+
+userSchema.pre('save', function (next) {
+  const doc = this
+  counter.findByIdAndUpdate({ _id: 'entityId' }, { $inc: { seq: 1 } }, function (error, counter) {
+    if (error) { return next(error) }
+    doc.id = counter.seq
+    next()
+  })
 })
 
 export const UserModel = model('User', userSchema)
