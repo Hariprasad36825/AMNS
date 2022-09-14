@@ -51,11 +51,17 @@ const userSchema = new Schema({
 
 userSchema.pre('save', function (next) {
   const doc = this
-  counter.findByIdAndUpdate({ _id: 'entityId' }, { $inc: { seq: 1 } }, function (error, counter) {
-    if (error) { return next(error) }
-    doc.id = counter.seq
-    next()
-  })
+  counter.findByIdAndUpdate(
+    { _id: 'entityId' },
+    { $inc: { seq: 1 } },
+    function (error, counter) {
+      if (error) {
+        return next(error)
+      }
+      doc.id = counter.seq
+      next()
+    }
+  )
 })
 
 export const UserModel = model('User', userSchema)
