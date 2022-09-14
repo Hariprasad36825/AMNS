@@ -7,7 +7,7 @@ const userSchema = new Schema({
     lowercase: true,
     validate: {
       validator: '/(([a-zA-Z0-9_]+\\.*)+(@kct.ac.in))/gmi',
-      message: props => `${props.value} is not an official email ID`
+      message: (props) => `${props.value} is not an official email ID`
     }
   },
   name: {
@@ -15,7 +15,7 @@ const userSchema = new Schema({
     required: true,
     validate: {
       validator: '/(\\w){4,15}/gmi',
-      message: props => `${props.value} is not valid.`
+      message: (props) => `${props.value} is not valid.`
     }
   },
   password: {
@@ -23,7 +23,7 @@ const userSchema = new Schema({
     required: true,
     validate: {
       validator: '/^(?=.*\\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/',
-      message: props => `${props.value} is not valid.`
+      message: (props) => `${props.value} is not valid.`
     }
   },
   createdAt: {
