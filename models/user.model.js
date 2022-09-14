@@ -1,10 +1,5 @@
 import { Schema, model } from 'mongoose'
-
-const CounterSchema = Schema({
-  _id: { type: String, required: true },
-  seq: { type: Number, default: 0 }
-})
-const counter = model('counter', CounterSchema)
+import { counter } from './counter.model'
 
 const userSchema = new Schema({
   id: {
@@ -53,12 +48,12 @@ userSchema.pre('save', function (next) {
   const doc = this
   counter.findByIdAndUpdate(
     { _id: 'entityId' },
-    { $inc: { seq: 1 } },
+    { $inc: { user_counter: 1 } },
     function (error, counter) {
       if (error) {
         return next(error)
       }
-      doc.id = counter.seq
+      doc.id = counter.user_counter
       next()
     }
   )
