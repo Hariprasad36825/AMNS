@@ -76,4 +76,4 @@ const staffSchema = new Schema({
   }
 })
 
-export const staffModel = model('Staff', staffSchema)
+export const StaffModel = model('Staff', staffSchema)
