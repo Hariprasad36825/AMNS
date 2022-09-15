@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import { model, Schema } from 'mongoose'
 import { counter } from './counter.model'
 
 const userSchema = new Schema({
@@ -24,11 +24,7 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
-    validate: {
-      validator: '/^(?=.*\\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/',
-      message: (props) => `${props.value} is not valid.`
-    }
+    required: true
   },
   createdAt: {
     type: Date,
