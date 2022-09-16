@@ -80,7 +80,7 @@ const studentSchema = new Schema({
     name: {
       type: String,
       validate: {
-        validator: '/(\\w){4,15}/gmi',
+        validator: /(\w){4,15}/gmi,
         message: (props) => `${props.value} is not valid.`
       }
     }
