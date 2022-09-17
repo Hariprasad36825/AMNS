@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose'
+import { StaffModel } from './staff.model'
 import { UserModel } from './user.model'
 
 const studentSchema = new Schema({
@@ -10,7 +11,7 @@ const studentSchema = new Schema({
     name: {
       type: String,
       validate: {
-        validator: /(\w){4,15}/gmi,
+        validator: '/(\\w){4,15}/gim',
         message: (props) => `${props.value} is not valid.`
       }
     },
@@ -19,7 +20,7 @@ const studentSchema = new Schema({
       required: true,
       unique: true,
       validate: {
-        validator: /\d{2}[a-z]{3}\d{3}/gim,
+        validator: '/\\d{2}[a-z]{3}\\d{3}/gim',
         message: (props) => `${props.value} is not a valid roll number.`
       }
     },
@@ -29,19 +30,14 @@ const studentSchema = new Schema({
     },
     gender: {
       type: String,
-      enum: [
-        'male',
-        'female',
-        'transgender',
-        'prefer not to say'
-      ]
+      enum: ['male', 'female', 'transgender', 'prefer not to say']
     },
     email: {
       type: String,
       required: true,
       lowercase: true,
       validate: {
-        validator: /(([a-z0-9_]+\.*)+(@kct.ac.in))/gmi,
+        validator: '/(([a-z0-9_]+\\.*)+(@kct.ac.in))/gim',
         message: (props) => `${props.value} is not an official email ID`
       }
     },
@@ -80,7 +76,7 @@ const studentSchema = new Schema({
     name: {
       type: String,
       validate: {
-        validator: /(\w){4,15}/gmi,
+        validator: '/(\\w){4,15}/gim',
         message: (props) => `${props.value} is not valid.`
       }
     }

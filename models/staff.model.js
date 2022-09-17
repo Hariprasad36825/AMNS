@@ -1,7 +1,12 @@
 import { model, Schema } from 'mongoose'
+import { Counter } from './counter.model'
 import { UserModel } from './user.model'
 
 const staffSchema = new Schema({
+  _id: {
+    type: Number,
+    default: 0
+  },
   user_id: {
     type: Schema.Types.ObjectId,
     ref: UserModel
@@ -74,6 +79,17 @@ const staffSchema = new Schema({
       type: String
     }
   }
+})
+
+staffSchema.pre('save', async function () {
+  const doc = this
+  await Counter.updateOne(
+    {},
+    { $inc: { staff_counter: 1 } },
+    function (counter) {
+      doc._id = counter.staff_counter
+    }
+  )
 })
 
 export const StaffModel = model('Staff', staffSchema)

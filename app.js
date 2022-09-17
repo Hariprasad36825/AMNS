@@ -1,9 +1,22 @@
-import express, { json } from 'express'
+import bodyParser from 'body-parser'
+import cors from 'cors'
+import express from 'express'
+import {
+  handleDatabaseError,
+  handleDefaultError,
+  handleMongooseError,
+  handleValidationError
+} from './middleware/errorHandler.middleware'
+import userRouter from './routes/user.route'
 import { OK } from './statusCodes'
 
 const app = express()
 
-// Cors Configuration - to allow swagger ui to read response
+// init middleware for express validator to be able to intercept request
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// Cors Configuration
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.header(
@@ -17,12 +30,19 @@ app.use((req, res, next) => {
   next()
 })
 
-// init middleware for express validator to be able to intercept request
-app.use(json())
+// cors for development
+if (process.env.NODE_ENV === 'development') app.use(cors())
 
 // routes
-app.get('/', (req, res) => {
-  res.send('Hello World')
+app.get('', function (req, res) {
+  return res.status(200).send('ok')
 })
+app.use('/api/register', userRouter)
+
+// error handlers
+app.use(handleValidationError)
+app.use(handleMongooseError)
+app.use(handleDatabaseError)
+app.use(handleDefaultError)
 
 export default app
