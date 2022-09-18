@@ -1,8 +1,8 @@
-import { Schema, model } from 'mongoose'
-import { TagsModel } from './tags.model'
-import { UserModel } from './user.model'
+import { model, Schema } from 'mongoose'
 import { CommentsModel } from './comments.model'
 import { Counter } from './counter.model'
+import { TagsModel } from './tags.model'
+import { UserModel } from './user.model'
 
 const postsSchema = new Schema({
   _id: {
@@ -42,13 +42,12 @@ postsSchema.pre('save', async function () {
   const doc = this
   const newTags = doc.tags
   await TagsModel.updateOne({}, { $addToSet: { tagset: { $each: newTags } } })
-  await Counter.updateOne(
-    {},
+  const counter = await Counter.findByIdAndUpdate(
+    'entityId',
     { $inc: { post_counter: 1 } },
-    function (counter) {
-      doc._id = counter.post_counter
-    }
+    { new: true, upsert: true }
   )
+  doc._id = await counter.post_counter
 })
 
 export const PostsModel = model('Posts', postsSchema)

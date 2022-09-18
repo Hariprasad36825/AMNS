@@ -7,6 +7,7 @@ import {
   handleMongooseError,
   handleValidationError
 } from './middleware/errorHandler.middleware'
+import loginRouter from './routes/login.route'
 import userRouter from './routes/user.route'
 import { OK } from './statusCodes'
 
@@ -38,6 +39,7 @@ app.get('', function (req, res) {
   return res.status(200).send('ok')
 })
 app.use('/api/register', userRouter)
+app.use('/api/login', loginRouter)
 
 // error handlers
 app.use(handleValidationError)

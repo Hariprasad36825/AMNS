@@ -8,7 +8,8 @@ export const getUserWithEmail = async (email) => {
 }
 
 export const getUserWithId = async (id) => {
-  return await UserModel.findById({ id }).select('-password -__v -createdAt')
+  const user = await UserModel.findById(id)
+  return user
 }
 
 export const createUser = async (name, username, password, type) => {
@@ -27,6 +28,6 @@ export const createToken = (user) => {
   return jwt.sign(payload, jwtSecret, { expiresIn: '60 days' })
 }
 
-export const comparePassword = async (user, password) => {
+export const comparePassword = async (password, user) => {
   return await bcrypt.compare(password, user.password)
 }

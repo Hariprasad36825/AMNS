@@ -15,7 +15,10 @@ const staffSchema = new Schema({
     name: {
       type: String,
       validate: {
-        validator: '/(\\w){4,15}/gmi',
+        validator: function (val) {
+          const re = /(\w){4,15}/gim
+          return re.test(val)
+        },
         message: (props) => `${props.value} is not valid.`
       }
     },
@@ -24,7 +27,10 @@ const staffSchema = new Schema({
       required: true,
       lowercase: true,
       validate: {
-        validator: '/(([a-zA-Z0-9_]+\\.*)+(@kct.ac.in))/gmi',
+        validator: function (val) {
+          const re = /(([a-zA-Z0-9_]+\.*)+(@kct.ac.in))/gim
+          return re.test(val)
+        },
         message: (props) => `${props.value} is not an official email ID`
       }
     },
@@ -83,13 +89,12 @@ const staffSchema = new Schema({
 
 staffSchema.pre('save', async function () {
   const doc = this
-  await Counter.updateOne(
-    {},
+  const counter = await Counter.findByIdAndUpdate(
+    'entityId',
     { $inc: { staff_counter: 1 } },
-    function (counter) {
-      doc._id = counter.staff_counter
-    }
+    { new: true, upsert: true }
   )
+  doc._id = await counter.staff_counter
 })
 
 export const StaffModel = model('Staff', staffSchema)

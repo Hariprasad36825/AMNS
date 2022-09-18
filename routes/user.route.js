@@ -33,7 +33,6 @@ userRouter.post(
     return Promise.resolve()
   }),
   (req, res, next) => {
-    // console.log(next)
     wrapAsync(registerUser, req, res, next)
   }
 )

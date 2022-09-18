@@ -11,7 +11,10 @@ const studentSchema = new Schema({
     name: {
       type: String,
       validate: {
-        validator: '/(\\w){4,15}/gim',
+        validator: function (val) {
+          const re = /(\w){4,15}/gim
+          return re.test(val)
+        },
         message: (props) => `${props.value} is not valid.`
       }
     },
@@ -20,7 +23,10 @@ const studentSchema = new Schema({
       required: true,
       unique: true,
       validate: {
-        validator: '/\\d{2}[a-z]{3}\\d{3}/gim',
+        validator: function (val) {
+          const re = /\d{2}[a-z]{3}\d{3}/gim
+          return re.test(val)
+        },
         message: (props) => `${props.value} is not a valid roll number.`
       }
     },
@@ -37,7 +43,10 @@ const studentSchema = new Schema({
       required: true,
       lowercase: true,
       validate: {
-        validator: '/(([a-z0-9_]+\\.*)+(@kct.ac.in))/gim',
+        validator: function (val) {
+          const re = /(([a-z0-9_]+\.*)+(@kct.ac.in))/gim
+          return re.test(val)
+        },
         message: (props) => `${props.value} is not an official email ID`
       }
     },
@@ -76,7 +85,10 @@ const studentSchema = new Schema({
     name: {
       type: String,
       validate: {
-        validator: '/(\\w){4,15}/gim',
+        validator: function (val) {
+          const re = /(\w){4,15}/gim
+          return re.test(val)
+        },
         message: (props) => `${props.value} is not valid.`
       }
     }

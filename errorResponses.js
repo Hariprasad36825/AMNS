@@ -1,4 +1,4 @@
-export const wrapper = (message) => ({ error: [{ message }] })
+export const wrapper = (message) => ({ errors: [{ message }] })
 
 export const userError = {
   exists: 'Email already exists',

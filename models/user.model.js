@@ -47,7 +47,6 @@ const userSchema = new Schema({
 
 userSchema.pre('save', async function () {
   const doc = this
-  // console.log(doc)
   const counter = await Counter.findByIdAndUpdate(
     'entityId',
     { $inc: { user_counter: 1 } },
