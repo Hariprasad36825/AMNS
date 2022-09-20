@@ -12,7 +12,7 @@ export const connectDB = async () => {
   }
 
   await mongoose.connect(dbUrl)
-  console.log('DB connected')
+  // console.log('DB connected')
 }
 
 export const disconnectDB = async () => {

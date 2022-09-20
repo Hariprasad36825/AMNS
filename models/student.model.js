@@ -1,5 +1,4 @@
 import { model, Schema } from 'mongoose'
-import { StaffModel } from './staff.model'
 import { UserModel } from './user.model'
 
 const studentSchema = new Schema({
@@ -31,8 +30,7 @@ const studentSchema = new Schema({
       }
     },
     birthday: {
-      type: Date,
-      required: true
+      type: Date
     },
     gender: {
       type: String,
@@ -79,8 +77,8 @@ const studentSchema = new Schema({
   },
   advisor: {
     _id: {
-      type: Schema.Types.ObjectId,
-      ref: StaffModel
+      type: Number,
+      ref: UserModel
     },
     name: {
       type: String,

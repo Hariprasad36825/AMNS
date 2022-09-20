@@ -4,6 +4,7 @@ import { createToken, createUser } from '../services/user.services'
 import {
   BAD_REQUEST,
   CREATION_SUCCESSFULL,
+  INTERNAL_SERVER_ERROR,
   INVALID_TOKEN,
   OK
 } from '../statusCodes'
@@ -51,7 +52,7 @@ describe('POST api/register', () => {
       .set('Content-type', 'application/json')
       .send(body)
     // console.log(res.error)
-    expect(res.status).toBe(BAD_REQUEST)
+    expect(res.status).toBe(INTERNAL_SERVER_ERROR)
   })
   it('invalid password', async () => {
     const body = customer3
