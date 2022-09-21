@@ -10,6 +10,7 @@ import {
 import loginRouter from './routes/login.route'
 import userRouter from './routes/user.route'
 import { OK } from './statusCodes'
+import staffRouter from './routes/staff.route'
 
 const app = express()
 
@@ -42,6 +43,7 @@ app.get('', function (req, res) {
 })
 app.use('/api/register', userRouter)
 app.use('/api/login', loginRouter)
+app.use('/api/getstudentofstaff', staffRouter)
 
 // error handlers
 app.use(handleValidationError)

@@ -2,7 +2,7 @@ import { wrapper } from '../errorResponses'
 import { BAD_REQUEST, DB_ERROR, INTERNAL_SERVER_ERROR } from '../statusCodes'
 
 export const handleValidationError = (error, req, res, next) => {
-  // console.log('error => ', error instanceof Error)
+  console.log(error.array)
   if (error instanceof Error && 'array' in error) {
     return res.status(BAD_REQUEST).send({ errors: error.array() })
   }

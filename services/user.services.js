@@ -4,7 +4,8 @@ import { jwtSecret } from '../config/index'
 import { UserModel } from '../models/user.model'
 
 export const getUserWithEmail = async (email) => {
-  return await UserModel.findOne({ email })
+  // console.log(email)
+  return await UserModel.findOne({ username: email })
 }
 
 export const getUserWithId = async (id) => {

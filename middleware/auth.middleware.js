@@ -5,7 +5,7 @@ import { FORBIDDEN_REQUEST, INVALID_TOKEN } from '../statusCodes'
 
 export const isAuthorised = (role) => (req, res, next) => {
   const token = req.header('x-auth-token')
-  console.log(token, jwtSecret)
+  // console.log(token, jwtSecret)
   if (!token) {
     return res.status(INVALID_TOKEN).send(wrapper(tokenError.notFound))
   }
@@ -19,7 +19,7 @@ export const isAuthorised = (role) => (req, res, next) => {
         .send(wrapper(tokenError.notAuthorised))
     }
     req.user = decoded.user
-    console.log(req.user)
+    // console.log(req.user)
     next()
   })
 }
