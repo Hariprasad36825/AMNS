@@ -32,7 +32,9 @@ app.use((req, res, next) => {
 })
 
 // cors for development
-if (process.env.NODE_ENV === 'development') app.use(cors())
+if (process.env.NODE_ENV === 'test') {
+  app.use(cors({ origin: true, credentials: true }))
+}
 
 // routes
 app.get('', function (req, res) {

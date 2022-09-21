@@ -24,14 +24,6 @@ userRouter.post(
   body('password', 'Please enter a password with atleast one number').matches(
     /^(?=.*\d)[0-9a-zA-Z!@#$&()\\-`.+,/]{1,}$/
   ),
-  body('type').custom((value) => {
-    if (!['student', 'staff', 'admin'].includes(value)) {
-      return Promise.reject(
-        new Error('Please enter type as student or staff or admin')
-      )
-    }
-    return Promise.resolve()
-  }),
   (req, res, next) => {
     wrapAsync(registerUser, req, res, next)
   }

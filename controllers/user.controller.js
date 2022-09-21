@@ -11,7 +11,6 @@ import { BAD_REQUEST, CREATION_SUCCESSFULL, OK } from '../statusCodes'
 
 export const registerUser = async (req, res) => {
   validationResult(req).throw()
-
   const { email, name, password, type } = req.body
   if (await getUserWithEmail(email)) {
     res.status(BAD_REQUEST).send(wrapper(userError.exists))
