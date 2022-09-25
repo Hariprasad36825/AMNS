@@ -1,4 +1,12 @@
 import { validationResult } from 'express-validator'
+import {
+  getStaffProfile,
+  getStaffProfilePublicView
+} from '../services/staff.services'
+import {
+  getStudentProfile,
+  getStudentProfilePublicView
+} from '../services/student.services'
 import { userError, wrapper } from '../errorResponses'
 import {
   comparePassword,
@@ -52,4 +60,21 @@ export const getUserDetails = async (req, res) => {
   const _id = req.user?._id
   if (!_id) throw new Error(userError.notDefined)
   res.status(OK).send(await getUserWithId(_id))
+}
+
+export const getProfile = async (req, res) => {
+  const _id = req.user?._id
+  const type = req.user?.type
+  if (type === 'staff') res.status(OK).send(await getStaffProfile(_id))
+  else if (type === 'student') res.status(OK).send(await getStudentProfile(_id))
+}
+
+export const getProfilePublicView = async (req, res) => {
+  const type = req.params.type
+  const _id = req.params.id
+  if (type === 'staff') {
+    res.status(OK).send(await getStaffProfilePublicView(_id))
+  } else if (type === 'student') {
+    res.status(OK).send(await getStudentProfilePublicView(_id))
+  }
 }
