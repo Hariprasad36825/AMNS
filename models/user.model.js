@@ -22,10 +22,10 @@ const userSchema = new Schema({
     lowercase: true,
     validate: {
       validator: function (val) {
-        const re = /(([a-zA-Z0-9_]+\.*)+(@kct.ac.in))/gim
-        return re.test(val)
+        const re = /(@kct\.ac\.in)$/gim
+        return !re.test(val)
       },
-      message: (props) => `${props.value} is not an official email ID`
+      message: (props) => `${props.value} must not be KCT email ID`
     }
   },
   password: {

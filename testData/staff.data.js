@@ -1,5 +1,5 @@
 export const staff1 = {
-  email: 'staff1.cs@kct.ac.in',
+  email: 'staff1.cs@gmail.com',
   name: 'staff1',
   type: 'staff',
   password: 'Customer@123'
@@ -7,9 +7,10 @@ export const staff1 = {
 
 export const staffData = [
   {
+    user_id: 1,
     personal_info: {
       name: 'staff1',
-      email: 'staff1.cs@kct.ac.in'
+      email: 'staff1.cs@gmail.com'
     },
     work_exp: {
       department_name: 'CSE',
@@ -19,7 +20,7 @@ export const staffData = [
   {
     personal_info: {
       name: 'staff2',
-      email: 'staff2.cs@kct.ac.in'
+      email: 'staff2.cs@gmail.com'
     },
     work_exp: {
       department_name: 'CSE',
@@ -29,7 +30,7 @@ export const staffData = [
   {
     personal_info: {
       name: 'staff3',
-      email: 'staff3.ec@kct.ac.in'
+      email: 'staff3.ec@gmail.com'
     },
     work_exp: {
       department_name: 'ECE',
@@ -39,7 +40,7 @@ export const staffData = [
   {
     personal_info: {
       name: 'staff4',
-      email: 'staff4.cs@kct.ac.in'
+      email: 'staff4.cs@gmail.com'
     },
     work_exp: {
       department_name: 'CSE',
@@ -49,7 +50,7 @@ export const staffData = [
   {
     personal_info: {
       name: 'staff5',
-      email: 'staff5.ec@kct.ac.in'
+      email: 'staff5.ec@gmail.com'
     },
     work_exp: {
       department_name: 'ECE',

@@ -45,7 +45,7 @@ describe('POST api/register', () => {
     expect(res.status).toBe(BAD_REQUEST)
     expect(res.body.errors[0].message).toBe('Email already exists')
   })
-  it('different email domain other than kct', async () => {
+  it('email with kct domain', async () => {
     const body = customer2
     const res = await request
       .post('/api/register')

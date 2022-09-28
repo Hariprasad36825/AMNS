@@ -2,7 +2,7 @@ import { wrapper } from '../errorResponses'
 import { BAD_REQUEST, DB_ERROR, INTERNAL_SERVER_ERROR } from '../statusCodes'
 
 export const handleValidationError = (error, req, res, next) => {
-  console.log(error.array)
+  // console.log(error.array)
   if (error instanceof Error && 'array' in error) {
     return res.status(BAD_REQUEST).send({ errors: error.array() })
   }
@@ -19,7 +19,7 @@ export const handleMongooseError = (error, req, res, next) => {
 
 export const handleDatabaseError = (error, req, res, next) => {
   if (error instanceof Error && error.name === 'MongoServerError') {
-    console.error(error)
+    // console.error(error)
     return res.status(DB_ERROR).send(wrapper(error.message))
   }
   next(error)
@@ -27,7 +27,7 @@ export const handleDatabaseError = (error, req, res, next) => {
 
 export const handleDefaultError = (error, req, res, next) => {
   if (error instanceof Error) {
-    console.error('default >> ', error)
+    // console.error('default >> ', error)
     return res.status(INTERNAL_SERVER_ERROR).send(wrapper(error.message))
   }
   next(error)

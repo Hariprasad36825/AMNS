@@ -9,7 +9,27 @@ export const getStudentOfStaff = async (staffId) => {
   return students
 }
 
-export const createStaff = async (req) => {
-  const staffs = await StaffModel.create(req)
-  return staffs
+export const createStaff = async (staff) => {
+  return await StaffModel.insertMany(staff)
+}
+
+export const getStaffProfile = async (staffId) => {
+  return await StaffModel.find(
+    { user_id: staffId },
+    { __v: 0, _id: 0, user_id: 0 }
+  )
+}
+
+export const getStaffProfilePublicView = async (staffId) => {
+  return await StaffModel.find(
+    { user_id: staffId },
+    {
+      __v: 0,
+      _id: 0,
+      user_id: 0,
+      'personal_info.email': 0,
+      'personal_info.phone': 0,
+      'personal_info.location': 0
+    }
+  )
 }
