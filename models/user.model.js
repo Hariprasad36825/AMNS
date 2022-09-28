@@ -42,6 +42,11 @@ const userSchema = new Schema({
   },
   tags: {
     type: [String]
+  },
+  status: {
+    type: String,
+    enum: ['active', 'not verified', 'suspended', 'not active'],
+    default: 'active'
   }
 })
 
