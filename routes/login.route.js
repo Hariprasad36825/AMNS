@@ -8,9 +8,7 @@ const loginRouter = Router()
 
 loginRouter.post(
   '/',
-  body('email', 'please include valid Kct Email').matches(
-    /(([a-zA-Z0-9_]+\.*)+(@kct.ac.in))/gim
-  ),
+  body('email', 'please include valid Email').isEmail(),
   body('password', 'please enter valid password').matches(
     /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/gim
   ),

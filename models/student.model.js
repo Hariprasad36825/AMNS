@@ -130,5 +130,4 @@ const studentSchema = new Schema({
     }
   }
 })
-
 export const StudentModel = model('Student', studentSchema)
