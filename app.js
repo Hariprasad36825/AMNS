@@ -13,7 +13,7 @@ import staffRouter from './routes/staff.route'
 import tokenRouter from './routes/token.route'
 import userRouter from './routes/user.route'
 import { OK } from './statusCodes'
-
+import studentRouter from './routes/student.route'
 const app = express()
 
 // init middleware for express validator to be able to intercept request
@@ -51,6 +51,7 @@ app.use('/api/getstudentofstaff', staffRouter)
 app.use('/api/profile', profileRouter)
 app.use('/api/refreshToken', tokenRouter)
 
+app.use('/api/student', studentRouter)
 // error handlers
 app.use(handleValidationError)
 app.use(handleMongooseError)
