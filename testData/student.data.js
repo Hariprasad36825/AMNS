@@ -106,10 +106,7 @@ export const studentData1 = {
         location: 'fs',
         phone: 1234567890
       },
-      skills: [
-        'cpp',
-        'c'
-      ],
+      skills: ['cpp', 'c'],
       work_exp: {
         company_name: '123',
         designation: 'dsad',
@@ -126,9 +123,12 @@ export const studentData1 = {
         year: 2019
       },
       social_links: {
-        linked_in: 'https://github.com/express-validator/express-validator/issues/748',
-        twitter: 'https://github.com/express-validator/express-validator/issues/748',
-        github: 'https://github.com/express-validator/express-validator/issues/748'
+        linked_in:
+          'https://github.com/express-validator/express-validator/issues/748',
+        twitter:
+          'https://github.com/express-validator/express-validator/issues/748',
+        github:
+          'https://github.com/express-validator/express-validator/issues/748'
       }
     },
     {
@@ -142,10 +142,7 @@ export const studentData1 = {
         location: 'fs',
         phone: 1234567890
       },
-      skills: [
-        'cpp',
-        'c'
-      ],
+      skills: ['cpp', 'c'],
       work_exp: {
         company_name: '123',
         designation: 'dsad',
@@ -162,9 +159,12 @@ export const studentData1 = {
         year: 2019
       },
       social_links: {
-        linked_in: 'https://github.com/express-validator/express-validator/issues/748',
-        twitter: 'https://github.com/express-validator/express-validator/issues/748',
-        github: 'https://github.com/express-validator/express-validator/issues/748'
+        linked_in:
+          'https://github.com/express-validator/express-validator/issues/748',
+        twitter:
+          'https://github.com/express-validator/express-validator/issues/748',
+        github:
+          'https://github.com/express-validator/express-validator/issues/748'
       }
     },
     {

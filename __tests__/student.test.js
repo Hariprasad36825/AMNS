@@ -3,10 +3,7 @@ import { createToken, createUser } from '../services/user.services'
 import { staff1 } from '../testData/staff.data'
 import { studentData, studentData1 } from '../testData/student.data'
 import { request } from './app.test'
-import {
-  BAD_REQUEST,
-  CREATION_SUCCESSFULL
-} from '../statusCodes'
+import { BAD_REQUEST, CREATION_SUCCESSFULL } from '../statusCodes'
 describe('POST /api/student/addstudents', () => {
   let jwtTokenStaff
   let staff
