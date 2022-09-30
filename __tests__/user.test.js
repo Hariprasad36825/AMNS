@@ -76,7 +76,7 @@ describe('POST api/login', () => {
       jwtToken = createToken({
         _id: user._id.toString(),
         type: user.type
-      })
+      }).AccessToken
     } catch (err) {
       console.error(err)
     }
@@ -115,7 +115,7 @@ describe('POST api/login', () => {
     it('correct details', async () => {
       const res = await request
         .get('/api/login')
-        .set('x-auth-token', jwtToken)
+        .set('Authorization', `Bearer ${jwtToken}`)
         .send()
       const { email, name, type } = res.body
       expect(res.status).toBe(OK)
@@ -126,7 +126,7 @@ describe('POST api/login', () => {
     it('invalid token', async () => {
       const res = await request
         .get('/api/login')
-        .set('x-auth-token', '1234')
+        .set('Authorization', 'Bearer sda')
         .send()
       expect(res.status).toBe(INVALID_TOKEN)
       expect(res.body.errors[0].message).toEqual(tokenError.invalid)

@@ -1,10 +1,10 @@
 import { connectDB, disconnectDB } from '../config/db_config'
+import { createStudent } from '../services/student.services'
 import { createToken, createUser } from '../services/user.services'
-import { request } from './app.test'
+import { FORBIDDEN_REQUEST, OK } from '../statusCodes'
 import { staff1 } from '../testData/staff.data'
 import { student1, studentData } from '../testData/student.data'
-import { OK, FORBIDDEN_REQUEST } from '../statusCodes'
-import { createStudent } from '../services/student.services'
+import { request } from './app.test'
 
 describe('GET /api/getstudentofstaff', () => {
   let jwtTokenStaff, jwtTokenStudent
@@ -22,11 +22,11 @@ describe('GET /api/getstudentofstaff', () => {
       jwtTokenStaff = createToken({
         _id: staff._id.toString(),
         type: staff.type
-      })
+      }).AccessToken
       jwtTokenStudent = createToken({
         _id: student._id.toString(),
         type: student.type
-      })
+      }).AccessToken
     } catch (err) {
       console.error(err)
     }
@@ -43,7 +43,7 @@ describe('GET /api/getstudentofstaff', () => {
   it('valid instance of array', async () => {
     const res = await request
       .get('/api/getstudentofstaff')
-      .set('x-auth-token', jwtTokenStaff)
+      .set('Authorization', `Bearer ${jwtTokenStaff}`)
       .send()
     expect(res.status).toBe(OK)
     expect(res.body).toBeInstanceOf(Array)
@@ -51,7 +51,7 @@ describe('GET /api/getstudentofstaff', () => {
   it('unauthorized user', async () => {
     const res = await request
       .get('/api/getstudentofstaff')
-      .set('x-auth-token', jwtTokenStudent)
+      .set('Authorization', `Bearer ${jwtTokenStudent}`)
       .send()
     expect(res.status).toBe(FORBIDDEN_REQUEST)
   })

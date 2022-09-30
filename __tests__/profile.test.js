@@ -1,5 +1,5 @@
-import { createStaff } from '../services/staff.services'
 import { connectDB, disconnectDB } from '../config/db_config'
+import { createStaff } from '../services/staff.services'
 import { createStudent } from '../services/student.services'
 import { createToken, createUser } from '../services/user.services'
 import { INVALID_TOKEN, OK } from '../statusCodes'
@@ -28,11 +28,11 @@ describe('GET /api/profile', () => {
       jwtTokenStaff = createToken({
         _id: staff._id.toString(),
         type: staff.type
-      })
+      }).AccessToken
       jwtTokenStudent = createToken({
         _id: student._id.toString(),
         type: student.type
-      })
+      }).AccessToken
 
       await createStaff(staffData)
       await createStudent(studentData)
@@ -49,7 +49,7 @@ describe('GET /api/profile', () => {
   it('invalid token', async () => {
     const res = await request
       .get('/api/profile')
-      .set('x-auth-token', 'g82f')
+      .set('Authorization', 'Bearer sdafs')
       .send()
     expect(res.status).toBe(INVALID_TOKEN)
     expect(res.body.errors).toBeInstanceOf(Array)
@@ -58,7 +58,7 @@ describe('GET /api/profile', () => {
   it('correct staff jwt token details', async () => {
     const res = await request
       .get('/api/profile')
-      .set('x-auth-token', jwtTokenStaff)
+      .set('Authorization', `Bearer ${jwtTokenStaff}`)
       .send()
     expect(res.status).toBe(OK)
     expect(res.body).toBeInstanceOf(Array)
@@ -67,7 +67,7 @@ describe('GET /api/profile', () => {
   it('correct student jwt token details', async () => {
     const res = await request
       .get('/api/profile')
-      .set('x-auth-token', jwtTokenStudent)
+      .set('Authorization', `Bearer ${jwtTokenStudent}`)
       .send()
     expect(res.status).toBe(OK)
     expect(res.body).toBeInstanceOf(Array)
@@ -76,7 +76,7 @@ describe('GET /api/profile', () => {
   it('correct public view of staff jwt token details', async () => {
     const res = await request
       .get('/api/profile/staff/1')
-      .set('x-auth-token', jwtTokenStaff)
+      .set('Authorization', `Bearer ${jwtTokenStaff}`)
       .send()
     expect(res.status).toBe(OK)
     expect(res.body).toBeInstanceOf(Array)
@@ -85,7 +85,7 @@ describe('GET /api/profile', () => {
   it('correct public view of student jwt token details', async () => {
     const res = await request
       .get('/api/profile/student/2')
-      .set('x-auth-token', jwtTokenStudent)
+      .set('Authorization', `Bearer ${jwtTokenStudent}`)
       // .set('type', 'student')
       // .set('id', 2)
       .send()

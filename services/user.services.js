@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
-import { jwtSecret } from '../config/index'
+
 import { UserModel } from '../models/user.model'
+import { createAuthToken, createRefreshToken } from './token.services'
 
 export const getUserWithEmail = async (email) => {
   // console.log(email)
@@ -9,7 +9,11 @@ export const getUserWithEmail = async (email) => {
 }
 
 export const getUserWithId = async (id) => {
-  const user = await UserModel.findById(id)
+  const user = await UserModel.findById(id, {
+    __v: 0,
+    password: 0,
+    createdAt: 0
+  })
   return user
 }
 
@@ -23,10 +27,9 @@ export const createUser = async (name, username, password, type) => {
 }
 
 export const createToken = (user) => {
-  const payload = {
-    user
-  }
-  return jwt.sign(payload, jwtSecret, { expiresIn: '60 days' })
+  const AccessToken = createAuthToken(user)
+  const RefreshToken = createRefreshToken(user)
+  return { AccessToken, RefreshToken }
 }
 
 export const comparePassword = async (password, user) => {

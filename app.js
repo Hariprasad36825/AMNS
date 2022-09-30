@@ -8,10 +8,11 @@ import {
   handleValidationError
 } from './middleware/errorHandler.middleware'
 import loginRouter from './routes/login.route'
+import profileRouter from './routes/profile.route'
+import staffRouter from './routes/staff.route'
+import tokenRouter from './routes/token.route'
 import userRouter from './routes/user.route'
 import { OK } from './statusCodes'
-import staffRouter from './routes/staff.route'
-import profileRouter from './routes/profile.route'
 
 const app = express()
 
@@ -38,6 +39,8 @@ if (process.env.NODE_ENV === 'test') {
   app.use(cors({ origin: true, credentials: true }))
 }
 
+// console.log(createToken({ user: 'hari', _id: 1 }))
+
 // routes
 app.get('', function (req, res) {
   return res.status(200).send('ok')
@@ -46,6 +49,7 @@ app.use('/api/register', userRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/getstudentofstaff', staffRouter)
 app.use('/api/profile', profileRouter)
+app.use('/api/refreshToken', tokenRouter)
 
 // error handlers
 app.use(handleValidationError)

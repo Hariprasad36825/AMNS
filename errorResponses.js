@@ -3,11 +3,13 @@ export const wrapper = (message) => ({ errors: [{ message }] })
 export const userError = {
   exists: 'Email already exists',
   invalid: 'Invalid Credentials',
-  notDefined: 'User not defined'
+  notDefined: 'User not defined',
+  InvalidAccount: 'Invalid User contact administrator'
 }
 
 export const tokenError = {
   notFound: 'No token, authorization denied',
   invalid: 'Token is not valid',
+  expired: 'Token expired',
   notAuthorised: "you don't have previleges to perform operation"
 }

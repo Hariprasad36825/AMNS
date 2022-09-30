@@ -1,4 +1,5 @@
 import { validationResult } from 'express-validator'
+import { userError, wrapper } from '../errorResponses'
 import {
   getStaffProfile,
   getStaffProfilePublicView
@@ -7,7 +8,7 @@ import {
   getStudentProfile,
   getStudentProfilePublicView
 } from '../services/student.services'
-import { userError, wrapper } from '../errorResponses'
+import { createAuthToken } from '../services/token.services'
 import {
   comparePassword,
   createToken,
@@ -77,4 +78,12 @@ export const getProfilePublicView = async (req, res) => {
   } else if (type === 'student') {
     res.status(OK).send(await getStudentProfilePublicView(_id))
   }
+}
+
+export const GetAccessToken = async (req, res) => {
+  const user = req.user
+  const RefreshToken = req.body.refreshToken
+
+  const AccessToken = createAuthToken(user)
+  res.status(OK).send({ AccessToken, RefreshToken })
 }
