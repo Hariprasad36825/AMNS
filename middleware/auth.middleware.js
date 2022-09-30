@@ -13,7 +13,7 @@ export const isAuthorised = (role) => (req, res, next) => {
   jwt.verify(token, jwtSecret, (error, decoded) => {
     if (error) {
       if (error.name === 'TokenExpiredError') {
-        return res.status(INVALID_TOKEN).send(wrapper(tokenError.expired))
+        return res.status(FORBIDDEN_REQUEST).send(wrapper(tokenError.expired))
       }
       return res.status(INVALID_TOKEN).send(wrapper(tokenError.invalid))
     }
