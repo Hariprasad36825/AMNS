@@ -32,3 +32,15 @@ export const getStudentProfilePublicView = async (studentId) => {
     }
   )
 }
+
+export const upsertStudents = async (docs) => {
+  return await StudentModel.bulkWrite(
+    docs.map((doc) => ({
+      updateOne: {
+        filter: { 'personal_info.roll_no': doc.personal_info.roll_no },
+        update: doc,
+        upsert: true
+      }
+    }))
+  )
+}
