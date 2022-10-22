@@ -6,6 +6,9 @@ export const userError = {
   notDefined: 'User not defined',
   InvalidAccount: 'Invalid User contact administrator'
 }
+export const userMessage = {
+  inserted: 'User Inserted successfully'
+}
 
 export const tokenError = {
   notFound: 'No token, authorization denied',

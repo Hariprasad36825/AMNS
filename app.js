@@ -7,6 +7,7 @@ import {
   handleMongooseError,
   handleValidationError
 } from './middleware/errorHandler.middleware'
+import adminRouter from './routes/admin.route'
 import loginRouter from './routes/login.route'
 import profileRouter from './routes/profile.route'
 import staffRouter from './routes/staff.route'
@@ -50,6 +51,7 @@ app.use('/api/login', loginRouter)
 app.use('/api/getstudentofstaff', staffRouter)
 app.use('/api/profile', profileRouter)
 app.use('/api/refreshToken', tokenRouter)
+app.use('/api/addStaff', adminRouter)
 
 // error handlers
 app.use(handleValidationError)

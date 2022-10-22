@@ -18,11 +18,11 @@ export const getUserWithId = async (id) => {
 }
 
 export const createUser = async (name, username, password, type) => {
-  // console.log(username)
   const user = new UserModel({ name, username, type })
   const salt = await bcrypt.genSalt(10)
   user.password = await bcrypt.hash(password, salt)
   await user.save()
+
   return user
 }
 

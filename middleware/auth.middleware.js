@@ -5,7 +5,7 @@ import { FORBIDDEN_REQUEST, INVALID_TOKEN } from '../statusCodes'
 
 export const isAuthorised = (role) => (req, res, next) => {
   let token = req.header('authorization')
-  // console.log(token)
+  // console.log(req.body)
   if (!token) {
     return res.status(INVALID_TOKEN).send(wrapper(tokenError.notFound))
   }

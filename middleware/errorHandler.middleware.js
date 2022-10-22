@@ -27,7 +27,6 @@ export const handleDatabaseError = (error, req, res, next) => {
 
 export const handleDefaultError = (error, req, res, next) => {
   if (error instanceof Error) {
-    // console.error('default >> ', error)
     return res.status(INTERNAL_SERVER_ERROR).send(wrapper(error.message))
   }
   next(error)
