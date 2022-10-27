@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import { checkSchema } from 'express-validator'
+import { addStudents } from '../controllers/student.controller'
 import { isAuthorised } from '../middleware/auth.middleware'
 import wrapAsync from '../utils/wrapAsync'
-import { addStudents } from '../controllers/student.controller'
 
 const studentRouter = Router()
 

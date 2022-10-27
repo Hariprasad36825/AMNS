@@ -1,10 +1,10 @@
+import { Router } from 'express'
 import {
   getProfile,
   getProfilePublicView
 } from '../controllers/user.controller'
-import { Router } from 'express'
-import wrapAsync from '../utils/wrapAsync'
 import { isAuthorised } from '../middleware/auth.middleware'
+import wrapAsync from '../utils/wrapAsync'
 
 const profileRouter = Router()
 

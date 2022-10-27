@@ -10,6 +10,10 @@ export const userMessage = {
   inserted: 'User Inserted successfully'
 }
 
+export const LocationMessage = {
+  added: 'location added'
+}
+
 export const tokenError = {
   notFound: 'No token, authorization denied',
   invalid: 'Token is not valid',

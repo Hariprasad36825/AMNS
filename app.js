@@ -8,13 +8,14 @@ import {
   handleValidationError
 } from './middleware/errorHandler.middleware'
 import adminRouter from './routes/admin.route'
+import { LocationRouter } from './routes/getData.route'
 import loginRouter from './routes/login.route'
 import profileRouter from './routes/profile.route'
 import staffRouter from './routes/staff.route'
+import studentRouter from './routes/student.route'
 import tokenRouter from './routes/token.route'
 import userRouter from './routes/user.route'
 import { OK } from './statusCodes'
-import studentRouter from './routes/student.route'
 const app = express()
 
 // init middleware for express validator to be able to intercept request
@@ -53,6 +54,8 @@ app.use('/api/profile', profileRouter)
 app.use('/api/refreshToken', tokenRouter)
 app.use('/api/addStaff', adminRouter)
 
+app.use('/api/getAllLocation', LocationRouter)
+app.use('/api/addLocation', LocationRouter)
 app.use('/api/student', studentRouter)
 // error handlers
 app.use(handleValidationError)

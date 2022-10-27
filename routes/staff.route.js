@@ -6,7 +6,6 @@ import wrapAsync from '../utils/wrapAsync'
 const staffRouter = Router()
 
 staffRouter.get('/', isAuthorised('staff'), (req, res, next) => {
-  // console.log('in')
   wrapAsync(getStudentListUnderStaff, req, res, next)
 })
 
