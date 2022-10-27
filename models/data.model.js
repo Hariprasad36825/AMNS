@@ -6,7 +6,6 @@ const dataSchema = mongoose.Schema({
     default: 1
   },
   skills: [String],
-  company: [String],
   department: [String]
 })
 
@@ -17,5 +16,13 @@ const locationSchema = mongoose.Schema({
   }
 })
 
+const companySchema = mongoose.Schema({
+  company: {
+    type: String,
+    lowercase: true
+  }
+})
+
 export const DataModel = model('Data', dataSchema)
 export const LocationModel = model('Location', locationSchema)
+export const CompanyModel = model('Company', companySchema)

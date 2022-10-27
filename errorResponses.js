@@ -14,6 +14,10 @@ export const LocationMessage = {
   added: 'location added'
 }
 
+export const CompanyMessage = {
+  added: 'company added'
+}
+
 export const tokenError = {
   notFound: 'No token, authorization denied',
   invalid: 'Token is not valid',

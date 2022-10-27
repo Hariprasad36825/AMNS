@@ -8,7 +8,7 @@ import {
   handleValidationError
 } from './middleware/errorHandler.middleware'
 import adminRouter from './routes/admin.route'
-import { LocationRouter } from './routes/getData.route'
+import { CompanyRouter, LocationRouter } from './routes/getData.route'
 import loginRouter from './routes/login.route'
 import profileRouter from './routes/profile.route'
 import staffRouter from './routes/staff.route'
@@ -54,8 +54,8 @@ app.use('/api/profile', profileRouter)
 app.use('/api/refreshToken', tokenRouter)
 app.use('/api/addStaff', adminRouter)
 
-app.use('/api/getAllLocation', LocationRouter)
-app.use('/api/addLocation', LocationRouter)
+app.use('/api/location', LocationRouter)
+app.use('/api/company', CompanyRouter)
 app.use('/api/student', studentRouter)
 // error handlers
 app.use(handleValidationError)
