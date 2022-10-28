@@ -4,7 +4,7 @@ export const createStudent = async (students) => {
   await StudentModel.insertMany(students)
 }
 
-export const getStudentProfile = async (studentId) => {
+export const getPersonalProfile = async (studentId) => {
   return await StudentModel.find(
     { user_id: studentId },
     {
@@ -15,7 +15,6 @@ export const getStudentProfile = async (studentId) => {
     }
   )
 }
-
 export const getStudentProfilePublicView = async (studentId) => {
   return await StudentModel.find(
     { user_id: studentId },
@@ -43,4 +42,18 @@ export const upsertStudents = async (docs) => {
       }
     }))
   )
+}
+
+export const getAllStudents = async (searchStr, filter) => {
+  const query = searchStr !== '' ? { $text: { $search: searchStr } } : {}
+
+  typeof filter !== 'undefined' &&
+    Object.entries(filter).map(([key, value]) =>
+      key === 'skills'
+        ? (query[`${key}`] = { $elemMatch: { $in: value } })
+        : (query[`${key}`] = { $in: value })
+    )
+
+  const students = await StudentModel.find(query)
+  return students
 }

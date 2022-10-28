@@ -1,9 +1,11 @@
 import { connectDB, disconnectDB } from '../config/db_config'
+import { upsertStudents } from '../services/student.services'
 import { createToken, createUser } from '../services/user.services'
+import { BAD_REQUEST, CREATION_SUCCESSFULL, DB_ERROR, OK } from '../statusCodes'
 import { staff1 } from '../testData/staff.data'
 import { studentData, studentData1 } from '../testData/student.data'
+import { adminValid } from '../testData/user.data'
 import { request } from './app.test'
-import { BAD_REQUEST, CREATION_SUCCESSFULL } from '../statusCodes'
 describe('POST /api/student/addstudents', () => {
   let jwtTokenStaff
   let staff
@@ -44,5 +46,74 @@ describe('POST /api/student/addstudents', () => {
 
     expect(res.status).toBe(BAD_REQUEST)
     expect(res.body).toBeDefined()
+  })
+})
+
+describe('POST api/student get students', () => {
+  let token
+  const { name, username, password, type } = adminValid
+  beforeAll(async () => {
+    await connectDB()
+
+    try {
+      const user = await createUser(name, username, password, type)
+
+      token = createToken({
+        _id: user._id.toString(),
+        type: user.type
+      }).AccessToken
+      await upsertStudents(studentData1.data)
+    } catch (err) {
+      console.error(err)
+    }
+  })
+  afterAll(async () => {
+    await disconnectDB()
+  })
+
+  it('only with search string', async () => {
+    const body = {
+      searchStr: 'd'
+    }
+    const res = await request
+      .post('/api/student')
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-type', 'application/json')
+      .send(body)
+
+    expect(res.status).toBe(OK)
+    expect(res.body).toBeInstanceOf(Array)
+  })
+  it('with search string and filters', async () => {
+    const body = {
+      searchStr: 'd',
+      filter: {
+        'academics.department_name': ['CSE', 'IT'],
+        skills: ['c']
+      }
+    }
+    const res = await request
+      .post('/api/student')
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-type', 'application/json')
+      .send(body)
+
+    expect(res.status).toBe(OK)
+    expect(res.body).toBeInstanceOf(Array)
+  })
+  it('without search string', async () => {
+    const body = {
+      filter: {
+        'academics.department_name': ['CSE', 'IT'],
+        skills: ['c']
+      }
+    }
+    const res = await request
+      .post('/api/student')
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-type', 'application/json')
+      .send(body)
+
+    expect(res.status).toBe(DB_ERROR)
   })
 })

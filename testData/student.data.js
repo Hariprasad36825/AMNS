@@ -134,7 +134,7 @@ export const studentData1 = {
     {
       personal_info: {
         name: 'deekshith',
-        roll_no: '19BCS014',
+        roll_no: '19BCS015',
         birthday: '2001-05-01',
         gender: 'male',
         email: 'deekshith@gmail.com',
@@ -142,7 +142,7 @@ export const studentData1 = {
         location: 'fs',
         phone: 1234567890
       },
-      skills: ['cpp', 'c'],
+      skills: ['cpp'],
       work_exp: {
         company_name: '123',
         designation: 'dsad',

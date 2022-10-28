@@ -5,7 +5,7 @@ import {
   getStaffProfilePublicView
 } from '../services/staff.services'
 import {
-  getStudentProfile,
+  getPersonalProfile,
   getStudentProfilePublicView
 } from '../services/student.services'
 import { createAuthToken } from '../services/token.services'
@@ -67,7 +67,9 @@ export const getProfile = async (req, res) => {
   const _id = req.user?._id
   const type = req.user?.type
   if (type === 'staff') res.status(OK).send(await getStaffProfile(_id))
-  else if (type === 'student') res.status(OK).send(await getStudentProfile(_id))
+  else if (type === 'student') {
+    res.status(OK).send(await getPersonalProfile(_id))
+  }
 }
 
 export const getProfilePublicView = async (req, res) => {

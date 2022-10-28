@@ -130,4 +130,26 @@ const studentSchema = new Schema({
     }
   }
 })
+
+studentSchema.index(
+  {
+    'personal_info.name': 'text',
+    'personal_info.roll_no': 'text',
+    'personal_info.email': 'text',
+    'personal_info.phone': 'text',
+    'work_exp.company_name': 'text',
+    'work_exp.designation': 'text'
+  },
+  {
+    weights: {
+      'personal_info.name': 5,
+      'personal_info.roll_no': 4,
+      'personal_info.email': 1,
+      'personal_info.phone': 2,
+      'work_exp.company_name': 5,
+      'work_exp.designation': 2
+    }
+  }
+)
+
 export const StudentModel = model('Student', studentSchema)
