@@ -1,11 +1,23 @@
+import { createStaff } from '../services/staff.services'
 import { connectDB, disconnectDB } from '../config/db_config'
-import { CompanyMessage, LocationMessage } from '../errorResponses'
-import { setCompany, setLocation } from '../services/data.services'
+import {
+  CompanyMessage,
+  DepartmentMessage,
+  LocationMessage,
+  SkillMessage
+} from '../errorResponses'
+import {
+  setCompany,
+  setDepartment,
+  setLocation,
+  setSkills
+} from '../services/data.services'
 import { createToken, createUser } from '../services/user.services'
 import { OK } from '../statusCodes'
-import { company, locations } from '../testData/filter.data'
+import { company, department, locations, skills } from '../testData/filter.data'
 import { adminValid } from '../testData/user.data'
 import { request } from './app.test'
+import { staffData } from '../testData/staff.data'
 
 describe('GET for all Filter Data', () => {
   let token
@@ -101,6 +113,99 @@ describe('GET for all Filter Data', () => {
         .send({ company })
       expect(res.status).toBe(OK)
       expect(res.body.message).toBe(CompanyMessage.added)
+    })
+  })
+
+  // department test cases
+
+  describe('GET api/department', () => {
+    beforeAll(async () => {
+      await setDepartment(1, department)
+    })
+
+    it('get dept as instance of array', async () => {
+      const res = await request
+        .get('/api/department/1')
+        .set('Authorization', `Bearer ${token}`)
+      expect(res.status).toBe(OK)
+      expect(res.body).toBeInstanceOf(Array)
+    })
+  })
+
+  describe('POST api/department', () => {
+    it('add single department', async () => {
+      const res = await request
+        .post('/api/department')
+        .set('Authorization', `Bearer ${token}`)
+        .set('Content-type', 'application/json')
+        .send({ department: 'CSE' })
+      expect(res.status).toBe(OK)
+      expect(res.body.message).toBe(DepartmentMessage.added)
+    })
+
+    it('add list of departments', async () => {
+      const res = await request
+        .post('/api/department')
+        .set('Authorization', `Bearer ${token}`)
+        .set('Content-type', 'application/json')
+        .send({ department })
+      expect(res.status).toBe(OK)
+      expect(res.body.message).toBe(DepartmentMessage.added)
+    })
+  })
+
+  // skills test cases
+
+  describe('GET api/skills', () => {
+    beforeAll(async () => {
+      await setSkills(1, skills)
+    })
+
+    it('get skills as instance of array', async () => {
+      const res = await request
+        .get('/api/skills/1')
+        .set('Authorization', `Bearer ${token}`)
+      expect(res.status).toBe(OK)
+      expect(res.body).toBeInstanceOf(Array)
+    })
+  })
+
+  describe('POST api/skills', () => {
+    it('add single skill', async () => {
+      const res = await request
+        .post('/api/skills')
+        .set('Authorization', `Bearer ${token}`)
+        .set('Content-type', 'application/json')
+        .send({ skills: 'javascript' })
+      expect(res.status).toBe(OK)
+      expect(res.body.message).toBe(SkillMessage.added)
+    })
+
+    it('add list of skills', async () => {
+      const res = await request
+        .post('/api/skills')
+        .set('Authorization', `Bearer ${token}`)
+        .set('Content-type', 'application/json')
+        .send({ skills })
+      expect(res.status).toBe(OK)
+      expect(res.body.message).toBe(SkillMessage.added)
+    })
+  })
+
+  // advisors test cases
+
+  describe('GET api/advisors', () => {
+    beforeAll(async () => {
+      await createStaff(staffData)
+    })
+
+    it('get All advisor names', async () => {
+      const res = await request
+        .get('/api/advisors')
+        .set('Authorization', `Bearer ${token}`)
+      expect(res.status).toBe(OK)
+      expect(res.body).toBeInstanceOf(Array)
+      console.log(res.body)
     })
   })
 })

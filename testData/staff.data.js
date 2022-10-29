@@ -18,6 +18,7 @@ export const staffData = [
     }
   },
   {
+    user_id: 2,
     personal_info: {
       name: 'staff2',
       email: 'staff2.cs@gmail.com'
@@ -28,6 +29,7 @@ export const staffData = [
     }
   },
   {
+    user_id: 3,
     personal_info: {
       name: 'staff3',
       email: 'staff3.ec@gmail.com'
@@ -38,6 +40,7 @@ export const staffData = [
     }
   },
   {
+    user_id: 4,
     personal_info: {
       name: 'staff4',
       email: 'staff4.cs@gmail.com'
@@ -48,6 +51,7 @@ export const staffData = [
     }
   },
   {
+    user_id: 5,
     personal_info: {
       name: 'staff5',
       email: 'staff5.ec@gmail.com'
