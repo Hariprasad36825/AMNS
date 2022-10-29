@@ -125,7 +125,7 @@ describe('GET for all Filter Data', () => {
 
     it('get dept as instance of array', async () => {
       const res = await request
-        .get('/api/department/1')
+        .get('/api/department')
         .set('Authorization', `Bearer ${token}`)
       expect(res.status).toBe(OK)
       expect(res.body).toBeInstanceOf(Array)
@@ -163,7 +163,7 @@ describe('GET for all Filter Data', () => {
 
     it('get skills as instance of array', async () => {
       const res = await request
-        .get('/api/skills/1')
+        .get('/api/skills')
         .set('Authorization', `Bearer ${token}`)
       expect(res.status).toBe(OK)
       expect(res.body).toBeInstanceOf(Array)

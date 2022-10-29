@@ -48,7 +48,7 @@ export const addCompany = async (req, res) => {
 
 // department
 export const getDepartment = async (req, res) => {
-  const id = req.params.id
+  const id = 1
   res
     .status(OK)
     .send(await (await getDepartments(id)).map((obj) => obj.department)[id - 1])
@@ -56,14 +56,14 @@ export const getDepartment = async (req, res) => {
 
 export const addDepartment = async (req, res) => {
   const dept = req.body.department
-  const id = req.body._id
+  const id = 1
   await setDepartment(id, typeof dept === 'string' ? [dept] : dept)
   res.status(OK).send({ message: DepartmentMessage.added })
 }
 
 // skills
 export const getSkill = async (req, res) => {
-  const id = req.params.id
+  const id = 1
   res
     .status(OK)
     .send(await (await getSkills(id)).map((obj) => obj.skills)[id - 1])
@@ -71,7 +71,7 @@ export const getSkill = async (req, res) => {
 
 export const addSkill = async (req, res) => {
   const skill = req.body.skills
-  const id = req.body._id
+  const id = 1
   await setSkills(id, typeof skill === 'string' ? [skill] : skill)
   res.status(OK).send({ message: SkillMessage.added })
 }

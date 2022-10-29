@@ -35,7 +35,7 @@ CompanyRouter.post('/', isAuthorised(), (req, res, next) => {
 
 export const DepartmentRouter = Router()
 
-DepartmentRouter.get('/:id', isAuthorised(), (req, res, next) => {
+DepartmentRouter.get('/', isAuthorised(), (req, res, next) => {
   wrapAsync(getDepartment, req, res, next)
 })
 DepartmentRouter.post('/', isAuthorised(), (req, res, next) => {
@@ -44,7 +44,7 @@ DepartmentRouter.post('/', isAuthorised(), (req, res, next) => {
 
 export const SkillsRouter = Router()
 
-SkillsRouter.get('/:id', isAuthorised(), (req, res, next) => {
+SkillsRouter.get('/', isAuthorised(), (req, res, next) => {
   wrapAsync(getSkill, req, res, next)
 })
 SkillsRouter.post('/', isAuthorised(), (req, res, next) => {
