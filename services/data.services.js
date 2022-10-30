@@ -1,4 +1,5 @@
-import { CompanyModel, LocationModel } from '../models/data.model'
+import { StaffModel } from '../models/staff.model'
+import { CompanyModel, DataModel, LocationModel } from '../models/data.model'
 
 // location
 export const setLocation = async (locations) => {
@@ -32,4 +33,29 @@ export const getCompanies = async (searchStr) => {
     { company: 1, _id: 0 },
     { transform: true }
   )
+}
+
+// department
+export const getDepartments = async (id) => {
+  return await DataModel.find({ _id: id }, { _id: 0, __v: 0, skills: 0 })
+}
+export const setDepartment = async (id, dept) => {
+  await DataModel.replaceOne(
+    { _id: id },
+    { department: dept },
+    { upsert: true }
+  )
+}
+
+// skills
+export const getSkills = async (id) => {
+  return await DataModel.find({ _id: id }, { _id: 0, __v: 0, department: 0 })
+}
+export const setSkills = async (id, skill) => {
+  await DataModel.replaceOne({ _id: id }, { skills: skill }, { upsert: true })
+}
+
+// advisors
+export const getAllAdvisors = async () => {
+  return await (await StaffModel.find({})).map((obj) => obj.personal_info.name)
 }

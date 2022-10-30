@@ -18,6 +18,14 @@ export const CompanyMessage = {
   added: 'company added'
 }
 
+export const SkillMessage = {
+  added: 'skill added'
+}
+
+export const DepartmentMessage = {
+  added: 'department added'
+}
+
 export const tokenError = {
   notFound: 'No token, authorization denied',
   invalid: 'Token is not valid',
