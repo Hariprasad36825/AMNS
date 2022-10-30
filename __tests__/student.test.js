@@ -76,7 +76,7 @@ describe('POST api/student get students', () => {
       searchStr: 'd'
     }
     const res = await request
-      .post('/api/student')
+      .post('/api/student/1/1')
       .set('Authorization', `Bearer ${token}`)
       .set('Content-type', 'application/json')
       .send(body)
@@ -93,7 +93,7 @@ describe('POST api/student get students', () => {
       }
     }
     const res = await request
-      .post('/api/student')
+      .post('/api/student/1/1')
       .set('Authorization', `Bearer ${token}`)
       .set('Content-type', 'application/json')
       .send(body)
@@ -109,7 +109,7 @@ describe('POST api/student get students', () => {
       }
     }
     const res = await request
-      .post('/api/student')
+      .post('/api/student/1/1')
       .set('Authorization', `Bearer ${token}`)
       .set('Content-type', 'application/json')
       .send(body)

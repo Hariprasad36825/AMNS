@@ -44,8 +44,12 @@ export const upsertStudents = async (docs) => {
   )
 }
 
-export const getAllStudents = async (searchStr, filter) => {
-  const query = searchStr !== '' ? { $text: { $search: searchStr } } : {}
+export const getAllStudents = async (searchStr, filter, records, skip) => {
+  const nameQuery = { 'personal_info.name': { $regex: searchStr } }
+  const query =
+    searchStr !== ''
+      ? { $or: [nameQuery, { $text: { $search: searchStr } }] }
+      : { ...nameQuery }
 
   typeof filter !== 'undefined' &&
     Object.entries(filter).map(([key, value]) =>
@@ -54,6 +58,6 @@ export const getAllStudents = async (searchStr, filter) => {
         : (query[`${key}`] = { $in: value })
     )
 
-  const students = await StudentModel.find(query)
+  const students = await StudentModel.find(query).skip(skip).limit(records)
   return students
 }
