@@ -15,7 +15,8 @@ const studentSchema = new Schema({
           return re.test(val)
         },
         message: (props) => `${props.value} is not valid.`
-      }
+      },
+      index: true
     },
     roll_no: {
       type: String,

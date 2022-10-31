@@ -14,6 +14,9 @@ export const addStudents = async (req, res) => {
 export const getStudents = async (req, res) => {
   const searchStr = req.body.searchStr
   const filters = req.body?.filter
+  const records = req.params?.records
+  const page = req.params?.page
+  const skip = (page - 1) * records
 
-  res.status(OK).send(await getAllStudents(searchStr, filters))
+  res.status(OK).send(await getAllStudents(searchStr, filters, records, skip))
 }

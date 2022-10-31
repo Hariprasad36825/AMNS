@@ -118,7 +118,7 @@ studentRouter.post(
   }
 )
 
-studentRouter.post('/', isAuthorised(), (req, res, next) => {
+studentRouter.post('/:records/:page', isAuthorised(), (req, res, next) => {
   wrapAsync(getStudents, req, res, next)
 })
 
