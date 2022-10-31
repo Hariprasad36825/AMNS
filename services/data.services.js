@@ -40,11 +40,7 @@ export const getDepartments = async (id) => {
   return await DataModel.find({ _id: id }, { _id: 0, __v: 0, skills: 0 })
 }
 export const setDepartment = async (id, dept) => {
-  await DataModel.replaceOne(
-    { _id: id },
-    { department: dept },
-    { upsert: true }
-  )
+  await DataModel.updateOne({ _id: id }, { department: dept }, { upsert: true })
 }
 
 // skills
@@ -52,7 +48,7 @@ export const getSkills = async (id) => {
   return await DataModel.find({ _id: id }, { _id: 0, __v: 0, department: 0 })
 }
 export const setSkills = async (id, skill) => {
-  await DataModel.replaceOne({ _id: id }, { skills: skill }, { upsert: true })
+  await DataModel.updateOne({ _id: id }, { skills: skill }, { upsert: true })
 }
 
 // advisors

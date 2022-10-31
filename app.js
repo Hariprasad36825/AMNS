@@ -64,8 +64,9 @@ app.use('/api/location', LocationRouter)
 app.use('/api/company', CompanyRouter)
 app.use('/api/department', DepartmentRouter)
 app.use('/api/skills', SkillsRouter)
-app.use('/api/advisors', AdvisorRouter)
+app.use('/api/advisor', AdvisorRouter)
 app.use('/api/student', studentRouter)
+
 // error handlers
 app.use(handleValidationError)
 app.use(handleMongooseError)

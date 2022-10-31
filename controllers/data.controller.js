@@ -16,7 +16,8 @@ import {
   setSkills
 } from '../services/data.services'
 import { OK } from '../statusCodes'
-
+import { createStaff } from '../services/staff.services'
+import { staffData } from '../testData/staff.data'
 // location
 export const getAllLocation = async (req, res) => {
   const searchStr = req.params.searchStr
@@ -78,5 +79,6 @@ export const addSkill = async (req, res) => {
 
 // advisor namelist
 export const getAdvisors = async (req, res) => {
+  await createStaff(staffData)
   res.status(OK).send(await getAllAdvisors())
 }

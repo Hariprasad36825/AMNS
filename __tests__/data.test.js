@@ -194,14 +194,14 @@ describe('GET for all Filter Data', () => {
 
   // advisors test cases
 
-  describe('GET api/advisors', () => {
+  describe('GET api/advisor', () => {
     beforeAll(async () => {
       await createStaff(staffData)
     })
 
     it('get All advisor names', async () => {
       const res = await request
-        .get('/api/advisors')
+        .get('/api/advisor')
         .set('Authorization', `Bearer ${token}`)
       expect(res.status).toBe(OK)
       expect(res.body).toBeInstanceOf(Array)
