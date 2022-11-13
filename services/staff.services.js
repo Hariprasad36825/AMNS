@@ -9,10 +9,6 @@ export const getStudentOfStaff = async (staffId) => {
   return students
 }
 
-export const createStaff = async (staff) => {
-  return await StaffModel.insertMany(staff)
-}
-
 export const getStaffProfile = async (staffId) => {
   return await StaffModel.find(
     { user_id: staffId },
@@ -32,4 +28,34 @@ export const getStaffProfilePublicView = async (staffId) => {
       'personal_info.location': 0
     }
   )
+}
+
+export const upsertStaffs = async (docs) => {
+  return await StaffModel.bulkWrite(
+    docs.map((doc) => ({
+      updateOne: {
+        filter: { 'personal_info.email': doc.personal_info.email },
+        update: doc,
+        upsert: true
+      }
+    }))
+  )
+}
+
+export const getAllStaffs = async (searchStr, filter, records, skip) => {
+  const nameQuery = { 'personal_info.name': { $regex: searchStr } }
+  const query =
+    searchStr !== ''
+      ? { $or: [nameQuery, { $text: { $search: searchStr } }] }
+      : { ...nameQuery }
+
+  typeof filter !== 'undefined' &&
+    Object.entries(filter).map(([key, value]) =>
+      key === 'skills'
+        ? (query[`${key}`] = { $elemMatch: { $in: value } })
+        : (query[`${key}`] = { $in: value })
+    )
+
+  const staffs = await StaffModel.find(query).skip(skip).limit(records)
+  return staffs
 }

@@ -29,8 +29,7 @@ studentRouter.post(
     'data.*.personal_info.birthday': {
       isDate: true,
       optional: { options: { nullable: true } },
-      errorMessage: 'only date format is available',
-      format: 'DD-MM-YYYY'
+      errorMessage: 'only date format is available'
     },
     'data.*.personal_info.gender': {
       optional: { options: { nullable: true } },

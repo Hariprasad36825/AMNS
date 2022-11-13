@@ -53,5 +53,5 @@ export const setSkills = async (id, skill) => {
 
 // advisors
 export const getAllAdvisors = async () => {
-  return await (await StaffModel.find({})).map((obj) => obj.personal_info.name)
+  return (await StaffModel.find({})).map((obj) => obj.personal_info.name)
 }

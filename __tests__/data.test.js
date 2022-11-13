@@ -1,4 +1,3 @@
-import { createStaff } from '../services/staff.services'
 import { connectDB, disconnectDB } from '../config/db_config'
 import {
   CompanyMessage,
@@ -17,7 +16,6 @@ import { OK } from '../statusCodes'
 import { company, department, locations, skills } from '../testData/filter.data'
 import { adminValid } from '../testData/user.data'
 import { request } from './app.test'
-import { staffData } from '../testData/staff.data'
 
 describe('GET for all Filter Data', () => {
   let token
@@ -195,17 +193,17 @@ describe('GET for all Filter Data', () => {
   // advisors test cases
 
   describe('GET api/advisor', () => {
-    beforeAll(async () => {
-      await createStaff(staffData)
-    })
+    // beforeAll(async () => {
+    //   await upsertStaffs(properStaffData)
+    // })
 
     it('get All advisor names', async () => {
       const res = await request
         .get('/api/advisor')
         .set('Authorization', `Bearer ${token}`)
+      console.log(res.body)
       expect(res.status).toBe(OK)
       expect(res.body).toBeInstanceOf(Array)
-      console.log(res.body)
     })
   })
 })

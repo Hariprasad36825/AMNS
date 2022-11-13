@@ -15,7 +15,8 @@ const staffSchema = new Schema({
           return re.test(val)
         },
         message: (props) => `${props.value} is not valid.`
-      }
+      },
+      index: true
     },
     email: {
       type: String,
@@ -28,6 +29,13 @@ const staffSchema = new Schema({
         },
         message: (props) => `${props.value} must not be KCT email ID`
       }
+    },
+    birthday: {
+      type: Date
+    },
+    gender: {
+      type: String,
+      enum: ['male', 'female', 'transgender', 'prefer not to say']
     },
     phone: {
       type: [String]
@@ -81,5 +89,24 @@ const staffSchema = new Schema({
     }
   }
 })
+
+staffSchema.index(
+  {
+    'personal_info.name': 'text',
+    'personal_info.email': 'text',
+    'personal_info.phone': 'text',
+    'work_exp.designation': 'text',
+    'work_exp.department_name': 'text'
+  },
+  {
+    weights: {
+      'personal_info.name': 5,
+      'personal_info.email': 1,
+      'personal_info.phone': 2,
+      'work_exp.department_name': 5,
+      'work_exp.designation': 4
+    }
+  }
+)
 
 export const StaffModel = model('Staff', staffSchema)

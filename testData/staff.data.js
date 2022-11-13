@@ -5,12 +5,56 @@ export const staff1 = {
   password: 'Customer@123'
 }
 
-export const staffData = [
+export const properStaffData = [
   {
-    user_id: 1,
+    personal_info: {
+      name: 'staff',
+      email: 'staff1.cs@gmail.com',
+      birthday: '1990-10-25',
+      gender: 'male',
+      phone: '9090909090'
+    },
+    work_exp: {
+      department_name: 'CSE',
+      designation: 'Professor'
+    }
+  },
+  {
+    personal_info: {
+      name: 'staffTwo',
+      email: 'staff2.cs@gmail.com',
+      birthday: '1990-10-25',
+      gender: 'male',
+      phone: '9090909090'
+    },
+    work_exp: {
+      department_name: 'CSE',
+      designation: 'Professor'
+    }
+  },
+  {
+    personal_info: {
+      name: 'staffThree',
+      email: 'staff3.ec@gmail.com',
+      birthday: '1990-10-25',
+      gender: 'male',
+      phone: '9090909090'
+    },
+    work_exp: {
+      department_name: 'ECE',
+      designation: 'Professor'
+    }
+  }
+]
+
+export const InvalidStaffData = [
+  {
     personal_info: {
       name: 'staff1',
-      email: 'staff1.cs@gmail.com'
+      email: 'staff1.cs@gmail.com',
+      birthday: '1990-10-25',
+      gender: 'male',
+      phone: '9090909090'
     },
     work_exp: {
       department_name: 'CSE',
@@ -18,10 +62,11 @@ export const staffData = [
     }
   },
   {
-    user_id: 2,
     personal_info: {
-      name: 'staff2',
-      email: 'staff2.cs@gmail.com'
+      name: 'staffTwo',
+      birthday: '1990-10-25',
+      gender: 'male',
+      phone: '9090909090'
     },
     work_exp: {
       department_name: 'CSE',
@@ -29,35 +74,15 @@ export const staffData = [
     }
   },
   {
-    user_id: 3,
     personal_info: {
-      name: 'staff3',
-      email: 'staff3.ec@gmail.com'
+      name: 'staffThree',
+      email: 'staff3.ec@gmail.com',
+      birthday: '1990-10-25',
+      gender: 'male',
+      phone: '9090909090'
     },
     work_exp: {
-      department_name: 'ECE',
-      designation: 'Professor'
-    }
-  },
-  {
-    user_id: 4,
-    personal_info: {
-      name: 'staff4',
-      email: 'staff4.cs@gmail.com'
-    },
-    work_exp: {
-      department_name: 'CSE',
-      designation: 'Professor'
-    }
-  },
-  {
-    user_id: 5,
-    personal_info: {
-      name: 'staff5',
-      email: 'staff5.ec@gmail.com'
-    },
-    work_exp: {
-      department_name: 'ECE',
+      department_name: 'ECE1',
       designation: 'Professor'
     }
   }

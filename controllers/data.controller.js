@@ -15,9 +15,9 @@ import {
   setLocation,
   setSkills
 } from '../services/data.services'
+import { upsertStaffs } from '../services/staff.services'
 import { OK } from '../statusCodes'
-import { createStaff } from '../services/staff.services'
-import { staffData } from '../testData/staff.data'
+import { properStaffData } from '../testData/staff.data'
 // location
 export const getAllLocation = async (req, res) => {
   const searchStr = req.params.searchStr
@@ -36,9 +36,7 @@ export const addLocation = async (req, res) => {
 export const getCompany = async (req, res) => {
   const searchStr = req.params.searchStr
 
-  res
-    .status(OK)
-    .send(await (await getCompanies(searchStr)).map((obj) => obj.company))
+  res.status(OK).send((await getCompanies(searchStr)).map((obj) => obj.company))
 }
 
 export const addCompany = async (req, res) => {
@@ -79,6 +77,6 @@ export const addSkill = async (req, res) => {
 
 // advisor namelist
 export const getAdvisors = async (req, res) => {
-  await createStaff(staffData)
+  await upsertStaffs(properStaffData)
   res.status(OK).send(await getAllAdvisors())
 }

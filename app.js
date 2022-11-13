@@ -66,7 +66,7 @@ app.use('/api/department', DepartmentRouter)
 app.use('/api/skills', SkillsRouter)
 app.use('/api/advisor', AdvisorRouter)
 app.use('/api/student', studentRouter)
-
+app.use('/api/staff', staffRouter)
 // error handlers
 app.use(handleValidationError)
 app.use(handleMongooseError)
