@@ -56,6 +56,12 @@ export const getAllStaffs = async (searchStr, filter, records, skip) => {
         : (query[`${key}`] = { $in: value })
     )
 
-  const staffs = await StaffModel.find(query).skip(skip).limit(records)
+  const staffs = await StaffModel.find(query, {
+    'personal_info.birthday': 0,
+    'personal_info.gender': 0
+  })
+    .populate({ path: 'user_id', select: 'profilePic' })
+    .skip(skip)
+    .limit(records)
   return staffs
 }

@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose'
+import { defaultAvatar } from '../config/index'
 import { Counter } from './counter.model'
 
 const userSchema = new Schema({
@@ -47,6 +48,10 @@ const userSchema = new Schema({
     type: String,
     enum: ['active', 'not verified', 'suspended', 'not active'],
     default: 'active'
+  },
+  profilePic: {
+    type: String,
+    default: defaultAvatar
   }
 })
 
