@@ -29,7 +29,8 @@ export const createUser = async (name, username, password, type) => {
 export const createToken = (user) => {
   const AccessToken = createAuthToken(user)
   const RefreshToken = createRefreshToken(user)
-  return { AccessToken, RefreshToken }
+  const type = user.type
+  return { AccessToken, RefreshToken, type }
 }
 
 export const comparePassword = async (password, user) => {
