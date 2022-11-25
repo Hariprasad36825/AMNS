@@ -2,6 +2,7 @@ import { validationResult } from 'express-validator'
 import { userError } from '../errorResponses'
 import {
   getAllStaffs,
+  getDefaultColumns,
   getStaffColumns,
   getStudentOfStaff,
   upsertStaffs
@@ -34,5 +35,7 @@ export const getStaffs = async (req, res) => {
 }
 
 export const getColumns = async (req, res) => {
-  res.status(OK).send(getStaffColumns())
+  res
+    .status(OK)
+    .send({ columns: getStaffColumns(), default_coulumns: getDefaultColumns() })
 }

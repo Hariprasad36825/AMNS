@@ -1,7 +1,7 @@
+import excelJS from 'exceljs'
+import { appLogo } from '../config/index'
 import { StudentModel } from '../models/student.model'
 import PDFDocument from '../utils/pdfKitTables'
-import { appLogo } from '../config/index'
-import excelJS from 'exceljs'
 
 export const createStudent = async (students) => {
   await StudentModel.insertMany(students)
@@ -182,5 +182,24 @@ export const getStudentColumns = () => {
   })
   delete columns[' id']
   delete columns['  v']
+  delete columns['User id']
   return columns
+}
+
+export const getDefaultColumns = () => {
+  const columns = getStudentColumns()
+  const subset = Object.fromEntries(
+    Object.entries(columns).filter(([key]) =>
+      [
+        'Name',
+        'Roll no',
+        'Email',
+        'Phone',
+        'Location',
+        'Department name',
+        'Year'
+      ].includes(key)
+    )
+  )
+  return subset
 }

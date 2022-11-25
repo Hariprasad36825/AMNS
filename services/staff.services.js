@@ -75,6 +75,25 @@ export const getStaffColumns = () => {
     return item
   })
   delete columns[' id']
+  delete columns['User id']
   delete columns['  v']
   return columns
+}
+
+export const getDefaultColumns = () => {
+  const columns = getStaffColumns()
+  const subset = Object.fromEntries(
+    Object.entries(columns).filter(([key]) =>
+      [
+        'Name',
+        'Email',
+        'Phone',
+        'Location',
+        'Department name',
+        'Year',
+        'Designation'
+      ].includes(key)
+    )
+  )
+  return subset
 }

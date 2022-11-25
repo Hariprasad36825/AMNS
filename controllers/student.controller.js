@@ -1,10 +1,11 @@
 import { validationResult } from 'express-validator'
 import {
   getAllStudents,
+  getDefaultColumns,
   getPdf,
-  upsertStudents,
+  getStudentColumns,
   getXLSX,
-  getStudentColumns
+  upsertStudents
 } from '../services/student.services'
 import { BAD_REQUEST, CREATION_SUCCESSFULL, OK } from '../statusCodes'
 
@@ -51,5 +52,8 @@ export const exportStudents = async (req, res) => {
 }
 
 export const getColumns = async (req, res) => {
-  res.status(OK).send(getStudentColumns())
+  res.status(OK).send({
+    columns: getStudentColumns(),
+    default_coulumns: getDefaultColumns()
+  })
 }
