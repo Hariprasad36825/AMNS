@@ -1,5 +1,9 @@
 import { validationResult } from 'express-validator'
-import { getAllStudents, upsertStudents } from '../services/student.services'
+import {
+  getAllStudents,
+  getStudentColumns,
+  upsertStudents
+} from '../services/student.services'
 import { BAD_REQUEST, CREATION_SUCCESSFULL, OK } from '../statusCodes'
 
 export const addStudents = async (req, res) => {
@@ -19,4 +23,8 @@ export const getStudents = async (req, res) => {
   const skip = (page - 1) * records
 
   res.status(OK).send(await getAllStudents(searchStr, filters, records, skip))
+}
+
+export const getColumns = async (req, res) => {
+  res.status(OK).send(getStudentColumns())
 }

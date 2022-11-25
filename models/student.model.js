@@ -72,7 +72,7 @@ const studentSchema = new Schema({
     from: {
       type: Date
     },
-    location: {
+    Work_location: {
       type: String
     }
   },
@@ -81,7 +81,7 @@ const studentSchema = new Schema({
       type: Number,
       ref: UserModel
     },
-    name: {
+    Advisor_name: {
       type: String,
       validate: {
         validator: function (val) {
