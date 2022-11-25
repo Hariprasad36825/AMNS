@@ -22,7 +22,8 @@
         "args": "after-used",
         "argsIgnorePattern": "^_"
       }
-    ]
+    ],
+    "space-before-function-paren": 0
   },
   "ignorePatterns": [".*", "yarn.lock", "*.json", "coverage/*"]
 }

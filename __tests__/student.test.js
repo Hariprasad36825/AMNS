@@ -117,3 +117,133 @@ describe('POST api/student get students', () => {
     expect(res.status).toBe(DB_ERROR)
   })
 })
+
+describe('POST /api/student/exportData', () => {
+  let token
+  const { name, username, password, type } = adminValid
+  beforeAll(async () => {
+    await connectDB()
+
+    try {
+      const user = await createUser(name, username, password, type)
+
+      token = createToken({
+        _id: user._id.toString(),
+        type: user.type
+      }).AccessToken
+      await upsertStudents(studentData1.data)
+    } catch (err) {
+      console.error(err)
+    }
+  })
+  afterAll(async () => {
+    await disconnectDB()
+  })
+
+  it('empty searchstr, mappings, format', async () => {
+    const body = {
+      searchStr: '',
+      filter: {},
+      format: '',
+      mappings: {}
+    }
+    const res = await request
+      .post('/api/student/exportData')
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-type', 'application/json')
+      .send(body)
+
+    expect(res.status).toBe(BAD_REQUEST)
+    expect(res.body).toBeDefined()
+  })
+
+  it('wrong format', async () => {
+    const body = {
+      searchStr: 'd',
+      filter: {},
+      format: 'qwe',
+      mappings: {
+        name: 'personal_info.name',
+        roll_no: 'personal_info.roll_no',
+        gender: 'personal_info.gender',
+        birthday: 'personal_info.birthday',
+        email: 'personal_info.email',
+        phone: 'personal_info.phone',
+        'Current Location': 'personal_info.location',
+        'company Name': 'work_exp.company_name',
+        designation: 'work_exp.designation',
+        'advisor name': 'advisor.name',
+        'department name': 'academics.department_name',
+        batch: 'academics.year'
+      }
+    }
+    const res = await request
+      .post('/api/student/exportData')
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-type', 'application/json')
+      .send(body)
+
+    expect(res.status).toBe(BAD_REQUEST)
+    expect(res.body).toBeDefined()
+  })
+
+  it('correct details for pdf', async () => {
+    const body = {
+      searchStr: 'd',
+      filter: {},
+      format: 'pdf',
+      mappings: {
+        name: 'personal_info.name',
+        roll_no: 'personal_info.roll_no',
+        gender: 'personal_info.gender',
+        birthday: 'personal_info.birthday',
+        email: 'personal_info.email',
+        phone: 'personal_info.phone',
+        'Current Location': 'personal_info.location',
+        'company Name': 'work_exp.company_name',
+        designation: 'work_exp.designation',
+        'advisor name': 'advisor.name',
+        'department name': 'academics.department_name',
+        batch: 'academics.year'
+      }
+    }
+    const res = await request
+      .post('/api/student/exportData')
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-type', 'application/json')
+      .send(body)
+
+    expect(res.status).toBe(OK)
+    expect(res.body).toBeDefined()
+  })
+
+  it('correct details for xlsx', async () => {
+    const body = {
+      searchStr: 'd',
+      filter: { 'academics.department_name': ['CSE', 'IT'] },
+      format: 'xlsx',
+      mappings: {
+        name: 'personal_info.name',
+        roll_no: 'personal_info.roll_no',
+        gender: 'personal_info.gender',
+        birthday: 'personal_info.birthday',
+        email: 'personal_info.email',
+        phone: 'personal_info.phone',
+        'Current Location': 'personal_info.location',
+        'company Name': 'work_exp.company_name',
+        designation: 'work_exp.designation',
+        'advisor name': 'advisor.name',
+        'department name': 'academics.department_name',
+        batch: 'academics.year'
+      }
+    }
+    const res = await request
+      .post('/api/student/exportData')
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-type', 'application/json')
+      .send(body)
+
+    expect(res.status).toBe(OK)
+    expect(res.body).toBeDefined()
+  })
+})
