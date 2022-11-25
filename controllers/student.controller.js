@@ -3,7 +3,8 @@ import {
   getAllStudents,
   getPdf,
   upsertStudents,
-  getXLSX
+  getXLSX,
+  getStudentColumns
 } from '../services/student.services'
 import { BAD_REQUEST, CREATION_SUCCESSFULL, OK } from '../statusCodes'
 
@@ -47,4 +48,8 @@ export const exportStudents = async (req, res) => {
   } else {
     res.status(BAD_REQUEST).send({ msg: 'wrong format' })
   }
+}
+
+export const getColumns = async (req, res) => {
+  res.status(OK).send(getStudentColumns())
 }

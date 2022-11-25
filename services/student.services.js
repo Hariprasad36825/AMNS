@@ -171,3 +171,16 @@ export const getXLSX = async (searchStr, filter, rawData, mappings) => {
 
   return buffer
 }
+
+export const getStudentColumns = () => {
+  const paths = Object.keys(StudentModel.schema.paths)
+  const columns = {}
+  paths.map((item) => {
+    const tmp = item.split('.').pop().replaceAll('_', ' ')
+    columns[tmp.charAt(0).toUpperCase() + tmp.slice(1)] = item
+    return item
+  })
+  delete columns[' id']
+  delete columns['  v']
+  return columns
+}

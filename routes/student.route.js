@@ -3,7 +3,8 @@ import { checkSchema } from 'express-validator'
 import {
   addStudents,
   getStudents,
-  exportStudents
+  exportStudents,
+  getColumns
 } from '../controllers/student.controller'
 import { isAuthorised } from '../middleware/auth.middleware'
 import wrapAsync from '../utils/wrapAsync'
@@ -127,6 +128,10 @@ studentRouter.post('/:records/:page', isAuthorised(), (req, res, next) => {
 
 studentRouter.post('/exportData', isAuthorised(), (req, res, next) => {
   wrapAsync(exportStudents, req, res, next)
+})
+
+studentRouter.get('/getColumns', isAuthorised(), (req, res, next) => {
+  wrapAsync(getColumns, req, res, next)
 })
 
 export default studentRouter

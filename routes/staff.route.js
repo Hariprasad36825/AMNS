@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { checkSchema } from 'express-validator'
 import {
   addStaff,
+  getColumns,
   getStaffs,
   getStudentListUnderStaff
 } from '../controllers/staff.controller'
@@ -80,6 +81,10 @@ staffRouter.post(
 
 staffRouter.post('/:records/:page', isAuthorised('admin'), (req, res, next) => {
   wrapAsync(getStaffs, req, res, next)
+})
+
+staffRouter.get('/getColumns', isAuthorised('admin'), (req, res, next) => {
+  wrapAsync(getColumns, req, res, next)
 })
 
 export default staffRouter

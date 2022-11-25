@@ -2,6 +2,7 @@ import { validationResult } from 'express-validator'
 import { userError } from '../errorResponses'
 import {
   getAllStaffs,
+  getStaffColumns,
   getStudentOfStaff,
   upsertStaffs
 } from '../services/staff.services'
@@ -30,4 +31,8 @@ export const getStaffs = async (req, res) => {
   const skip = (page - 1) * records
 
   res.status(OK).send(await getAllStaffs(searchStr, filters, records, skip))
+}
+
+export const getColumns = async (req, res) => {
+  res.status(OK).send(getStaffColumns())
 }
