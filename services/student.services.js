@@ -78,7 +78,7 @@ const convertRawData = (rawData, mappings) => {
 
   const rows = []
   rawData.forEach((val) => {
-    console.log(val)
+    // console.log(val)
     const row = []
     Object.entries(mappings).forEach(([key, value]) => {
       const cell = get(val, value)

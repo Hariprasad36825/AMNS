@@ -15,7 +15,7 @@ export const studentData = [
     },
     advisor: {
       _id: 1,
-      name: 'staff1'
+      Advisor_name: 'staff1'
     },
     academics: {
       year: 2019
@@ -29,7 +29,7 @@ export const studentData = [
     },
     advisor: {
       _id: 2,
-      name: 'staff2'
+      Advisor_name: 'staff2'
     },
     academics: {
       year: 2019
@@ -43,7 +43,7 @@ export const studentData = [
     },
     advisor: {
       _id: 1,
-      name: 'staff1'
+      Advisor_name: 'staff1'
     },
     academics: {
       year: 2019
@@ -57,7 +57,7 @@ export const studentData = [
     },
     advisor: {
       _id: 1,
-      name: 'staff1'
+      Advisor_name: 'staff1'
     },
     academics: {
       year: 2020
@@ -71,7 +71,7 @@ export const studentData = [
     },
     advisor: {
       _id: 3,
-      name: 'staff3'
+      Advisor_name: 'staff3'
     },
     academics: {
       year: 2020
@@ -85,7 +85,7 @@ export const studentData = [
     },
     advisor: {
       _id: 3,
-      name: 'staff3'
+      Advisor_name: 'staff3'
     },
     academics: {
       year: 2020
@@ -111,15 +111,14 @@ export const studentData1 = {
         company_name: '123',
         designation: 'dsad',
         from: '2019-11-01',
-        location: 'dsadasd'
+        Work_location: 'dsadasd'
       },
       advisor: {
         _id: 1,
-        name: 'dsada'
+        Advisor_name: 'dsada'
       },
       academics: {
         department_name: 'CSE',
-        achievements: 'none',
         year: 2019
       },
       social_links: {
@@ -147,15 +146,14 @@ export const studentData1 = {
         company_name: '123',
         designation: 'dsad',
         from: '2019-05-01',
-        location: 'dsadasd'
+        Work_location: 'dsadasd'
       },
       advisor: {
         _id: 1,
-        name: 'dsada'
+        Advisor_name: 'dsada'
       },
       academics: {
         department_name: 'CSE',
-        achievements: 'none',
         year: 2019
       },
       social_links: {
@@ -165,20 +163,6 @@ export const studentData1 = {
           'https://github.com/express-validator/express-validator/issues/748',
         github:
           'https://github.com/express-validator/express-validator/issues/748'
-      }
-    },
-    {
-      personal_info: {
-        email: 'student12.19cs@gmail.com',
-        name: 'student',
-        roll_no: '19BCS012'
-      },
-      advisor: {
-        _id: 2,
-        name: 'staff'
-      },
-      academics: {
-        year: 2019
       }
     }
   ]

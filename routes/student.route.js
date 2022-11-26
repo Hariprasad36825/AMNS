@@ -2,9 +2,9 @@ import { Router } from 'express'
 import { checkSchema } from 'express-validator'
 import {
   addStudents,
-  getStudents,
   exportStudents,
-  getColumns
+  getColumns,
+  getStudents
 } from '../controllers/student.controller'
 import { isAuthorised } from '../middleware/auth.middleware'
 import wrapAsync from '../utils/wrapAsync'
@@ -74,14 +74,14 @@ studentRouter.post(
       isDate: true,
       optional: { options: { nullable: true } }
     },
-    'data.*.work_exp.location': {
+    'data.*.work_exp.Work_location': {
       isAlpha: true,
       optional: { options: { nullable: true } }
     },
     'data.*.advisor._id': {
       isInt: true
     },
-    'data.*.advisor.name': {
+    'data.*.advisor.Advisor_name': {
       isAlpha: true
     },
     'data.*.academics.department_name': {

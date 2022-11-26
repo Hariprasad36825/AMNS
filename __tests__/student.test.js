@@ -32,7 +32,6 @@ describe('POST /api/student/addstudents', () => {
       .post('/api/student/addstudents')
       .set('Authorization', `Bearer ${jwtTokenStaff}`)
       .send(body)
-
     expect(res.status).toBe(CREATION_SUCCESSFULL)
     expect(res.body).toBeDefined()
   })

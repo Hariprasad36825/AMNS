@@ -1,9 +1,9 @@
 import { connectDB, disconnectDB } from '../config/db_config'
-import { createStaff } from '../services/staff.services'
-import { createStudent } from '../services/student.services'
+import { upsertStaffs } from '../services/staff.services'
+import { upsertStudents } from '../services/student.services'
 import { createToken, createUser } from '../services/user.services'
 import { INVALID_TOKEN, OK } from '../statusCodes'
-import { staff1, staffData } from '../testData/staff.data'
+import { properStaffData, staff1 } from '../testData/staff.data'
 import { student1, studentData } from '../testData/student.data'
 import { request } from './app.test'
 
@@ -34,8 +34,8 @@ describe('GET /api/profile', () => {
         type: student.type
       }).AccessToken
 
-      await createStaff(staffData)
-      await createStudent(studentData)
+      await upsertStaffs(properStaffData)
+      await upsertStudents(studentData)
       // console.log(jwtTokenStaff)
       //   console.log(await getStaffProfile(staff._id))
     } catch (err) {

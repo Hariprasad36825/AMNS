@@ -201,7 +201,7 @@ describe('GET for all Filter Data', () => {
       const res = await request
         .get('/api/advisor')
         .set('Authorization', `Bearer ${token}`)
-      console.log(res.body)
+      // console.log(res.body)
       expect(res.status).toBe(OK)
       expect(res.body).toBeInstanceOf(Array)
     })
