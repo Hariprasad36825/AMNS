@@ -181,3 +181,114 @@ describe('POST api/staff get staff', () => {
     expect(res.status).toBe(DB_ERROR)
   })
 })
+
+describe('POST /api/staff/exportData', () => {
+  let token
+  const { name, username, password, type } = adminValid
+  beforeAll(async () => {
+    await connectDB()
+
+    try {
+      const user = await createUser(name, username, password, type)
+
+      token = createToken({
+        _id: user._id.toString(),
+        type: user.type
+      }).AccessToken
+      await upsertStaffs(properStaffData)
+    } catch (err) {
+      console.error(err)
+    }
+  })
+  afterAll(async () => {
+    await disconnectDB()
+  })
+
+  it('empty searchstr, mappings, format', async () => {
+    const body = {
+      searchStr: '',
+      filter: {},
+      format: '',
+      mappings: {}
+    }
+    const res = await request
+      .post('/api/staff/exportData')
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-type', 'application/json')
+      .send(body)
+
+    expect(res.status).toBe(BAD_REQUEST)
+    expect(res.body).toBeDefined()
+  })
+
+  it('wrong format', async () => {
+    const body = {
+      searchStr: 'd',
+      filter: {},
+      format: 'qwe',
+      mappings: {
+        Name: 'personal_info.name',
+        Email: 'personal_info.email',
+        Phone: 'personal_info.phone',
+        Location: 'personal_info.location',
+        'Department name': 'work_exp.department_name',
+        Designation: 'work_exp.designation'
+      }
+    }
+    const res = await request
+      .post('/api/staff/exportData')
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-type', 'application/json')
+      .send(body)
+
+    expect(res.status).toBe(BAD_REQUEST)
+    expect(res.body).toBeDefined()
+  })
+  it('correct format for PDF', async () => {
+    const body = {
+      searchStr: 's',
+      filter: {},
+      format: 'pdf',
+      mappings: {
+        Name: 'personal_info.name',
+        Email: 'personal_info.email',
+        Phone: 'personal_info.phone',
+        Location: 'personal_info.location',
+        'Department name': 'work_exp.department_name',
+        Designation: 'work_exp.designation'
+      }
+    }
+    const res = await request
+      .post('/api/staff/exportData')
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-type', 'application/json')
+      .send(body)
+
+    expect(res.status).toBe(BAD_REQUEST)
+    expect(res.body).toBeDefined()
+  })
+
+  it('correct format for xlsx', async () => {
+    const body = {
+      searchStr: 's',
+      filter: {},
+      format: 'xlsx',
+      mappings: {
+        Name: 'personal_info.name',
+        Email: 'personal_info.email',
+        Phone: 'personal_info.phone',
+        Location: 'personal_info.location',
+        'Department name': 'work_exp.department_name',
+        Designation: 'work_exp.designation'
+      }
+    }
+    const res = await request
+      .post('/api/staff/exportData')
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-type', 'application/json')
+      .send(body)
+
+    expect(res.status).toBe(BAD_REQUEST)
+    expect(res.body).toBeDefined()
+  })
+})
