@@ -1,24 +1,9 @@
-// import dotenv from 'dotenv'
+import sgMail from '@sendgrid/mail'
+import dotenv from 'dotenv'
+dotenv.config()
 
-// dotenv.config()
-// export const transporter = nodemailer.createTransport({
-//   host: 'my.smtp.host',
-//   port: 465,
-//   secure: true, // use TLS
-//   auth: {
-//     user: process.env.EMAIL_USER,
-//     pass: process.env.EMAIL_PASS
-//   },
-//   tls: {
-//     // do not fail on invalid certs
-//     rejectUnauthorized: false
-//   }
-// })
+const mailApi = process.env.SENDGRID_API_KEY
 
-// transporter.verify(function (error, success) {
-//   if (error) {
-//     console.log(error)
-//   } else {
-//     console.log('Server is ready to take our messages')
-//   }
-// })
+sgMail.setApiKey(mailApi)
+
+export default sgMail
