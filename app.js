@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import express from 'express'
+import { upload } from './config/storage.config'
 import {
   handleDatabaseError,
   handleDefaultError,
@@ -20,13 +21,14 @@ import profileRouter from './routes/profile.route'
 import staffRouter from './routes/staff.route'
 import studentRouter from './routes/student.route'
 import tokenRouter from './routes/token.route'
-import userRouter from './routes/user.route'
+import { uploadRouter, userRouter } from './routes/user.route'
 import { OK } from './statusCodes'
 const app = express()
 
 // init middleware for express validator to be able to intercept request
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(upload.any())
 
 // Cors Configuration
 app.use((req, res, next) => {
@@ -47,7 +49,7 @@ if (process.env.NODE_ENV === 'test') {
   app.use(cors({ origin: true, credentials: true }))
 }
 
-// console.log(createToken({ user: 'hari', _id: 1 }))
+// console.log(process.cwd())
 
 // routes
 app.get('', function (req, res) {
@@ -67,6 +69,9 @@ app.use('/api/skills', SkillsRouter)
 app.use('/api/advisor', AdvisorRouter)
 app.use('/api/student', studentRouter)
 app.use('/api/staff', staffRouter)
+
+app.use('/api/upload', uploadRouter)
+app.use('/api/removefile', uploadRouter)
 // error handlers
 app.use(handleValidationError)
 app.use(handleMongooseError)

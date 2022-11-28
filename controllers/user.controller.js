@@ -1,4 +1,6 @@
 import { validationResult } from 'express-validator'
+import fs from 'fs'
+import { upload } from '../config/storage.config'
 import { userError, wrapper } from '../errorResponses'
 import {
   getStaffProfile,
@@ -16,7 +18,7 @@ import {
   getUserWithEmail,
   getUserWithId
 } from '../services/user.services'
-import { BAD_REQUEST, CREATION_SUCCESSFULL, OK } from '../statusCodes'
+import { ACCEPTED, BAD_REQUEST, CREATION_SUCCESSFULL, OK } from '../statusCodes'
 
 export const registerUser = async (req, res) => {
   validationResult(req).throw()
@@ -88,4 +90,30 @@ export const GetAccessToken = async (req, res) => {
 
   const AccessToken = createAuthToken(user)
   res.status(OK).send({ AccessToken, RefreshToken })
+}
+
+export const uploadFiles = async (req, res) => {
+  // console.log("🚀 ~ file: user.controller.js ~ line 105 ~ upload.single ~ req.files", req.files)
+  if (!req.files) {
+    res.status(BAD_REQUEST).send({ msg: 'No files found' })
+  }
+  upload.single(req, res, (err) => {
+    if (err) {
+      res.status(BAD_REQUEST).send({ msg: 'upload Failed' })
+    }
+
+    res
+      .status(OK)
+      .send({ msg: 'upload success', fileName: req.files[0].filename })
+  })
+  res
+    .status(OK)
+    .send({ msg: 'upload success', fileName: req.files[0].filename })
+}
+
+export const deleteFile = (req, res) => {
+  const fileName = req.params.fileName
+  const filePath = process.cwd() + '\\uploads\\' + fileName
+  fs.unlinkSync(filePath)
+  res.status(ACCEPTED).send({ msg: 'Deleted Successfully' })
 }

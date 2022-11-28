@@ -1,4 +1,5 @@
 export const CREATION_SUCCESSFULL = 201
+export const ACCEPTED = 202
 export const OK = 200
 export const NO_CONTENT = 204
 

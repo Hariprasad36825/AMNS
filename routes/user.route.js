@@ -1,9 +1,14 @@
 import { Router } from 'express'
 import { body } from 'express-validator'
-import { registerUser } from '../controllers/user.controller'
+import {
+  deleteFile,
+  registerUser,
+  uploadFiles
+} from '../controllers/user.controller'
+import { isAuthorised } from '../middleware/auth.middleware'
 import wrapAsync from '../utils/wrapAsync'
 
-const userRouter = Router()
+export const userRouter = Router()
 
 userRouter.post(
   '/',
@@ -29,4 +34,12 @@ userRouter.post(
   }
 )
 
-export default userRouter
+export const uploadRouter = Router()
+
+uploadRouter.post('/attachment', isAuthorised(), (req, res) => {
+  uploadFiles(req, res)
+})
+
+uploadRouter.delete('/:fileName', isAuthorised(), (req, res) => {
+  deleteFile(req, res)
+})
