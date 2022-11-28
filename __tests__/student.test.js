@@ -192,18 +192,12 @@ describe('POST /api/student/exportData', () => {
       filter: {},
       format: 'pdf',
       mappings: {
-        name: 'personal_info.name',
-        roll_no: 'personal_info.roll_no',
-        gender: 'personal_info.gender',
-        birthday: 'personal_info.birthday',
-        email: 'personal_info.email',
-        phone: 'personal_info.phone',
-        'Current Location': 'personal_info.location',
-        'company Name': 'work_exp.company_name',
-        designation: 'work_exp.designation',
-        'advisor name': 'advisor.name',
-        'department name': 'academics.department_name',
-        batch: 'academics.year'
+        Name: 'personal_info.name',
+        Email: 'personal_info.email',
+        Phone: 'personal_info.phone',
+        Location: 'personal_info.location',
+        'Department name': 'work_exp.department_name',
+        Designation: 'work_exp.designation'
       }
     }
     const res = await request

@@ -39,7 +39,7 @@ export const exportStudents = async (req, res) => {
     searchStr.length <= 0 ||
     format.length <= 0 ||
     Object.keys(mappings) <= 0 ||
-    Object.keys(rawData) <= 0
+    rawData.length <= 0
   ) {
     res.status(BAD_REQUEST).send({ msg: 'export failed' })
   } else if (format === 'pdf') {

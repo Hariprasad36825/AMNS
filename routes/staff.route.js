@@ -4,7 +4,8 @@ import {
   addStaff,
   getColumns,
   getStaffs,
-  getStudentListUnderStaff
+  getStudentListUnderStaff,
+  exportStaff
 } from '../controllers/staff.controller'
 import { isAuthorised } from '../middleware/auth.middleware'
 import wrapAsync from '../utils/wrapAsync'
@@ -85,6 +86,10 @@ staffRouter.post('/:records/:page', isAuthorised('admin'), (req, res, next) => {
 
 staffRouter.get('/getColumns', isAuthorised('admin'), (req, res, next) => {
   wrapAsync(getColumns, req, res, next)
+})
+
+staffRouter.post('/exportData', isAuthorised(), (req, res, next) => {
+  wrapAsync(exportStaff, req, res, next)
 })
 
 export default staffRouter

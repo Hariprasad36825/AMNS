@@ -78,12 +78,11 @@ const convertRawData = (rawData, mappings) => {
 
   const rows = []
   rawData.forEach((val) => {
-    // console.log(val)
     const row = []
     Object.entries(mappings).forEach(([key, value]) => {
       const cell = get(val, value)
 
-      if (key === 'birthday' && cell) {
+      if (key.toLowerCase() === 'birthday' && cell) {
         const dateStr = new Date(cell)
         dateStr.toLocaleDateString()
         const datetime = dateStr.toISOString().split('T')
