@@ -18,6 +18,7 @@ import {
 } from './routes/getData.route'
 import loginRouter from './routes/login.route'
 import { mailRouter } from './routes/mail.route'
+import NotificationRouter from './routes/notification.route'
 import profileRouter from './routes/profile.route'
 import staffRouter from './routes/staff.route'
 import studentRouter from './routes/student.route'
@@ -75,6 +76,7 @@ app.use('/api/upload', uploadRouter)
 app.use('/api/removefile', uploadRouter)
 
 app.use('/api/sendmail', mailRouter)
+app.use('/api/notification', NotificationRouter)
 // error handlers
 app.use(handleValidationError)
 app.use(handleMongooseError)
