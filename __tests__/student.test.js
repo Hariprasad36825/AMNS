@@ -56,14 +56,16 @@ describe('POST api/student get students', () => {
 
     try {
       const user = await createUser(name, username, password, type)
+      await createUser(name, username, password, 'staff')
 
       token = createToken({
         _id: user._id.toString(),
         type: user.type
       }).AccessToken
+      // console.log("🚀 ~ file: student.test.js:69 ~ beforeAll ~ studentData1.data", studentData1.data)
       await upsertStudents(studentData1.data)
     } catch (err) {
-      console.error(err)
+      console.error('err>>', err)
     }
   })
   afterAll(async () => {
@@ -120,11 +122,13 @@ describe('POST api/student get students', () => {
 describe('POST /api/student/exportData', () => {
   let token
   const { name, username, password, type } = adminValid
+
   beforeAll(async () => {
     await connectDB()
 
     try {
       const user = await createUser(name, username, password, type)
+      await createUser(name, username, password, 'staff')
 
       token = createToken({
         _id: user._id.toString(),
@@ -132,7 +136,7 @@ describe('POST /api/student/exportData', () => {
       }).AccessToken
       await upsertStudents(studentData1.data)
     } catch (err) {
-      console.error(err)
+      console.error('error >>>', err)
     }
   })
   afterAll(async () => {

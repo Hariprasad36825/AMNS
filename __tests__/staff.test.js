@@ -127,6 +127,7 @@ describe('POST api/staff get staff', () => {
         _id: user._id.toString(),
         type: user.type
       }).AccessToken
+      // console.log("🚀 ~ file: staff.test.js:134 ~ beforeAll ~ properStaffData", properStaffData)
       await upsertStaffs(properStaffData)
     } catch (err) {
       console.error(err)
@@ -264,7 +265,7 @@ describe('POST /api/staff/exportData', () => {
       .set('Content-type', 'application/json')
       .send(body)
 
-    expect(res.status).toBe(BAD_REQUEST)
+    expect(res.status).toBe(OK)
     expect(res.body).toBeDefined()
   })
 
@@ -288,7 +289,7 @@ describe('POST /api/staff/exportData', () => {
       .set('Content-type', 'application/json')
       .send(body)
 
-    expect(res.status).toBe(BAD_REQUEST)
+    expect(res.status).toBe(OK)
     expect(res.body).toBeDefined()
   })
 })

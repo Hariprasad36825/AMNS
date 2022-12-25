@@ -38,14 +38,16 @@ const staffSchema = new Schema({
       enum: ['male', 'female', 'transgender', 'prefer not to say']
     },
     phone: {
-      type: [String]
+      type: [String],
+      default: []
     },
     location: {
       type: String
     }
   },
   skills: {
-    type: [String]
+    type: [String],
+    default: undefined
   },
   work_exp: {
     department_name: {

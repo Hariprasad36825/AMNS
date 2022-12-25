@@ -50,7 +50,8 @@ const studentSchema = new Schema({
       }
     },
     phone: {
-      type: [String]
+      type: [String],
+      default: []
     },
     location: {
       type: String
@@ -60,7 +61,8 @@ const studentSchema = new Schema({
     type: String
   },
   skills: {
-    type: [String]
+    type: [String],
+    default: undefined
   },
   work_exp: {
     company_name: {

@@ -101,10 +101,10 @@ export const studentData1 = {
         roll_no: '19BCS014',
         birthday: '2001-08-01',
         gender: 'male',
-        email: 'deekshith@gmail.com',
+        email: 'hariprasad36825@gmail.com',
         bio: 'biggest mf of all time',
         location: 'fs',
-        phone: 1234567890
+        phone: [1234567890, 9944751873]
       },
       skills: ['cpp', 'c'],
       work_exp: {
@@ -132,38 +132,19 @@ export const studentData1 = {
     },
     {
       personal_info: {
-        name: 'deekshith',
-        roll_no: '19BCS015',
-        birthday: '2001-05-01',
-        gender: 'male',
-        email: 'deekshith@gmail.com',
-        bio: 'biggest mf of all time',
-        location: 'fs',
-        phone: 1234567890
-      },
-      skills: ['cpp'],
-      work_exp: {
-        company_name: '123',
-        designation: 'dsad',
-        from: '2019-05-01',
-        Work_location: 'dsadasd'
+        email: 'student12.19cs@gmail.com',
+        name: 'student',
+        roll_no: '19BCS012'
       },
       advisor: {
-        _id: 1,
-        Advisor_name: 'dsada'
+        _id: 2,
+        Advisor_name: 'staff'
       },
       academics: {
-        department_name: 'CSE',
+        department_name: 'IT',
         year: 2019
       },
-      social_links: {
-        linked_in:
-          'https://github.com/express-validator/express-validator/issues/748',
-        twitter:
-          'https://github.com/express-validator/express-validator/issues/748',
-        github:
-          'https://github.com/express-validator/express-validator/issues/748'
-      }
+      skills: ['cpp', 'c']
     }
   ]
 }
