@@ -28,7 +28,12 @@ const app = express()
 
 // init middleware for express validator to be able to intercept request
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+    limit: '50mb'
+  })
+)
 app.use(upload.any())
 
 // Cors Configuration

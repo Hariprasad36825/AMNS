@@ -6,6 +6,10 @@ export const sendMailServices = async (msg) => {
       return 'success'
     })
     .catch((err) => {
+      console.log(
+        '🚀 ~ file: mail.services.js:11 ~ sendMailServices ~ err.response',
+        err
+      )
       return err.response?.data
     })
 }
