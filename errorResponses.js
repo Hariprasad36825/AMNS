@@ -10,6 +10,10 @@ export const userMessage = {
   inserted: 'User Inserted successfully'
 }
 
+export const NotificationMessage = {
+  created: 'Notification inserted successfully'
+}
+
 export const LocationMessage = {
   added: 'location added'
 }
