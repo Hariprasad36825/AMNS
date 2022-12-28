@@ -48,7 +48,9 @@ export const upsertStudents = async (docs) => {
 }
 
 export const getAllStudents = async (searchStr, filter, records, skip) => {
-  const nameQuery = { 'personal_info.name': { $regex: searchStr } }
+  const nameQuery = {
+    'personal_info.name': { $regex: searchStr, $options: 'i' }
+  }
   const query =
     searchStr !== ''
       ? { $or: [nameQuery, { $text: { $search: searchStr } }] }

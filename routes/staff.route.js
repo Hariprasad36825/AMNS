@@ -2,10 +2,10 @@ import { Router } from 'express'
 import { checkSchema } from 'express-validator'
 import {
   addStaff,
+  exportStaff,
   getColumns,
   getStaffs,
-  getStudentListUnderStaff,
-  exportStaff
+  getStudentListUnderStaff
 } from '../controllers/staff.controller'
 import { isAuthorised } from '../middleware/auth.middleware'
 import wrapAsync from '../utils/wrapAsync'
@@ -29,8 +29,10 @@ staffRouter.post(
       }
     },
     'data.*.personal_info.name': {
-      errorMessage: 'name should contain only alphabets',
-      isAlpha: true
+      matches: {
+        options: /^[A-Za-z ]+$/i,
+        errorMessage: 'name should contain only alphabets'
+      }
     },
     'data.*.personal_info.birthday': {
       isDate: true,

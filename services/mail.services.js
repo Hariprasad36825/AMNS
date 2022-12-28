@@ -8,7 +8,7 @@ export const sendMailServices = async (msg) => {
     .catch((err) => {
       console.log(
         '🚀 ~ file: mail.services.js:11 ~ sendMailServices ~ err.response',
-        err
+        err.response.body
       )
       return err.response?.data
     })

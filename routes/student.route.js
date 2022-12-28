@@ -24,8 +24,11 @@ studentRouter.post(
       }
     },
     'data.*.personal_info.name': {
-      errorMessage: 'name should contain only alphabets',
-      isAlpha: true
+      // errorMessage: 'name should contain only alphabets',
+      matches: {
+        options: /^[A-Za-z ]+$/i,
+        errorMessage: 'name should contain only alphabets'
+      }
     },
     'data.*.personal_info.roll_no': {
       isAlphanumeric: true,
