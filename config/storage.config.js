@@ -9,10 +9,10 @@ const storage = multer.diskStorage({
     cb(
       null,
       file.fieldname +
-      '-' +
-      uniqueSuffix +
-      '.' +
-      file.originalname.split('.').pop()
+        '-' +
+        uniqueSuffix +
+        '.' +
+        file.originalname.split('.').pop()
     )
   }
 })
