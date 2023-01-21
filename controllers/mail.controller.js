@@ -37,11 +37,9 @@ export const sendMail = async (req, res) => {
     })
     html += '</div>'
   }
-  console.log(html)
 
   const msg = { to, from, subject, html, attachments }
   const result = await sendMailServices(msg)
-  console.log('🚀 ~ file: mail.controller.js:31 ~ sendMail ~ result', result)
 
   if (result !== 'success') {
     return res.status(BAD_REQUEST).send(wrapper('mail send failed'))

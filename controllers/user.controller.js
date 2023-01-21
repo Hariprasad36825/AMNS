@@ -1,5 +1,6 @@
 import { validationResult } from 'express-validator'
 import fs from 'fs'
+import path from 'path'
 import { upload } from '../config/storage.config'
 import { userError, wrapper } from '../errorResponses'
 import {
@@ -113,7 +114,7 @@ export const uploadFiles = async (req, res) => {
 
 export const deleteFile = (req, res) => {
   const fileName = req.params.fileName
-  const filePath = process.cwd() + '\\uploads\\' + fileName
+  const filePath = path.join(process.cwd(), 'uploads', fileName)
   fs.unlinkSync(filePath)
   res.status(ACCEPTED).send({ msg: 'Deleted Successfully' })
 }
