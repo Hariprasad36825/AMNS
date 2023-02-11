@@ -12,13 +12,10 @@ const postsSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  user_id: {
-    type: Schema.Types.ObjectId,
-    ref: UserModel
-  },
-  name: {
-    type: String,
-    required: true
+  user: {
+    type: Number,
+    ref: UserModel,
+    autopopulate: true
   },
   caption: {
     type: String,
@@ -31,7 +28,7 @@ const postsSchema = new Schema({
       ref: UserModel
     }
   ],
-  image: [],
+  attachments: [String], // storing paths
   comment: {
     type: Schema.Types.ObjectId,
     ref: CommentsModel
@@ -50,4 +47,4 @@ postsSchema.pre('save', async function () {
   doc._id = await counter.post_counter
 })
 
-export const PostsModel = model('Posts', postsSchema)
+export const PostModel = model('Posts', postsSchema)

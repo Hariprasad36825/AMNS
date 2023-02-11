@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { body } from 'express-validator'
 import {
   deleteFile,
+  getFileUrl,
   registerUser,
   uploadFiles
 } from '../controllers/user.controller'
@@ -42,4 +43,8 @@ uploadRouter.post('/attachment', isAuthorised(), (req, res) => {
 
 uploadRouter.delete('/:fileName', isAuthorised(), (req, res) => {
   deleteFile(req, res)
+})
+
+uploadRouter.get('/:fileName', isAuthorised(), (req, res) => {
+  getFileUrl(req, res)
 })

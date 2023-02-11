@@ -1,4 +1,4 @@
-import { wrapper } from '../errorResponses'
+import { errorMessageWrapper } from '../errorResponses'
 import { BAD_REQUEST, DB_ERROR, INTERNAL_SERVER_ERROR } from '../statusCodes'
 
 export const handleValidationError = (error, req, res, next) => {
@@ -12,7 +12,7 @@ export const handleValidationError = (error, req, res, next) => {
 export const handleMongooseError = (error, req, res, next) => {
   if (error instanceof Error && error.name === 'MongooseError') {
     console.error(error)
-    return res.status(DB_ERROR).send(wrapper(error.message))
+    return res.status(DB_ERROR).send(errorMessageWrapper(error.message))
   }
   next(error)
 }
@@ -20,14 +20,16 @@ export const handleMongooseError = (error, req, res, next) => {
 export const handleDatabaseError = (error, req, res, next) => {
   if (error instanceof Error && error.name === 'MongoServerError') {
     // console.error(error)
-    return res.status(DB_ERROR).send(wrapper(error.message))
+    return res.status(DB_ERROR).send(errorMessageWrapper(error.message))
   }
   next(error)
 }
 
 export const handleDefaultError = (error, req, res, next) => {
   if (error instanceof Error) {
-    return res.status(INTERNAL_SERVER_ERROR).send(wrapper(error.message))
+    return res
+      .status(INTERNAL_SERVER_ERROR)
+      .send(errorMessageWrapper(error.message))
   }
   next(error)
 }

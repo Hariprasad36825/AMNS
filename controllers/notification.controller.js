@@ -1,5 +1,5 @@
+import { validationResult } from 'express-validator'
 import { NotificationMessage } from '../errorResponses'
-import { validationResult } from '../node_modules/express-validator/src/validation-result'
 import {
   createNotification,
   createUserNotification,

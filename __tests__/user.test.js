@@ -8,7 +8,11 @@ import {
   INVALID_TOKEN,
   OK
 } from '../statusCodes'
-import { customer1, customer2, customer3 } from '../testData/user.data'
+import {
+  studentValid1,
+  studentValid2,
+  studentValid3
+} from '../testData/user.data'
 import { request } from './app.test'
 
 describe('POST api/register', () => {
@@ -19,7 +23,9 @@ describe('POST api/register', () => {
     await disconnectDB()
   })
   it('correct details', async () => {
-    const body = customer1
+    const body = studentValid1
+    body.email = body.username
+    delete body.username
     const res = await request
       .post('/api/register')
       .set('Content-type', 'application/json')
@@ -37,7 +43,7 @@ describe('POST api/register', () => {
     expect(res.body.errors).toBeInstanceOf(Array)
   })
   it('Email already exits', async () => {
-    const body = customer1
+    const body = studentValid1
     const res = await request
       .post('/api/register')
       .set('Content-type', 'application/json')
@@ -46,7 +52,9 @@ describe('POST api/register', () => {
     expect(res.body.errors[0].message).toBe('Email already exists')
   })
   it('email with kct domain', async () => {
-    const body = customer2
+    const body = studentValid2
+    body.email = body.username
+    delete body.username
     const res = await request
       .post('/api/register')
       .set('Content-type', 'application/json')
@@ -55,7 +63,7 @@ describe('POST api/register', () => {
     expect(res.status).toBe(INTERNAL_SERVER_ERROR)
   })
   it('invalid password', async () => {
-    const body = customer3
+    const body = studentValid3
     const res = await request
       .post('/api/register')
       .set('Content-type', 'application/json')
@@ -68,7 +76,7 @@ describe('POST api/register', () => {
 describe('POST api/login', () => {
   let jwtToken
   let user
-  const { email, name, password, type } = customer1
+  const { username: email, name, password, type } = studentValid1
   beforeAll(async () => {
     await connectDB()
     try {

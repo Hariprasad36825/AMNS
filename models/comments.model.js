@@ -1,17 +1,18 @@
-import { Schema, model } from 'mongoose'
-import { PostsModel } from './posts.models'
+import { model, Schema } from 'mongoose'
 import { UserModel } from './user.model'
 
-const commentsSchema = new Schema(
-  {
-    post_id: { type: Schema.Types.ObjectId, ref: PostsModel },
-    user_id: { type: Schema.Types.ObjectId, ref: UserModel },
-    name: String,
-    replies: [this],
-    body: String
-  },
-  { timestamps: true }
-)
+const commentsSchema = new Schema({
+  _id: { type: Schema.Types.ObjectId, required: true },
+  user_id: { type: Schema.Types.ObjectId, ref: UserModel },
+  name: String,
+  body: String,
+  replies: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comments'
+    }
+  ]
+})
 
 export const CommentsModel = model('Comments', commentsSchema)
 
