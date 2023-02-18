@@ -20,6 +20,7 @@ import ImportRouter from './routes/import.route'
 import loginRouter from './routes/login.route'
 import { mailRouter } from './routes/mail.route'
 import NotificationRouter from './routes/notification.route'
+import { postRouter } from './routes/post.route'
 import profileRouter from './routes/profile.route'
 import staffRouter from './routes/staff.route'
 import studentRouter from './routes/student.route'
@@ -80,10 +81,15 @@ app.use('/api/staff', staffRouter)
 
 app.use('/api/upload', uploadRouter)
 app.use('/api/removefile', uploadRouter)
+app.use('/api/attachment', uploadRouter)
 
 app.use('/api/sendmail', mailRouter)
+
 app.use('/api/notification', NotificationRouter)
 app.use('/api/import', ImportRouter)
+
+app.use('/api/posts', postRouter)
+
 // error handlers
 app.use(handleValidationError)
 app.use(handleMongooseError)

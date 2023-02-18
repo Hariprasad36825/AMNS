@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { jwtSecretRefersh } from '../config/index'
-import { tokenError, userError, wrapper } from '../errorResponses'
+import { errorMessageWrapper, tokenError, userError } from '../errorResponses'
 import { createRefreshToken } from '../services/token.services'
 import { getUserWithId } from '../services/user.services'
 import { FORBIDDEN_REQUEST, INVALID_TOKEN } from '../statusCodes'
@@ -9,7 +9,9 @@ export const verifyToken = () => (req, res, next) => {
   let token = req.body.refreshToken
   // console.log(token)
   if (!token) {
-    return res.status(INVALID_TOKEN).send(wrapper(tokenError.notFound))
+    return res
+      .status(INVALID_TOKEN)
+      .send(errorMessageWrapper(tokenError.notFound))
   }
   jwt.verify(token, jwtSecretRefersh, async (error, decoded) => {
     let user
@@ -22,7 +24,9 @@ export const verifyToken = () => (req, res, next) => {
         token = await createRefreshToken({ user: payload._id }, payload.uid)
         user = payload._id
       } else {
-        return res.status(INVALID_TOKEN).send(wrapper(tokenError.invalid))
+        return res
+          .status(INVALID_TOKEN)
+          .send(errorMessageWrapper(tokenError.invalid))
       }
     }
     if (decoded) {
@@ -30,12 +34,14 @@ export const verifyToken = () => (req, res, next) => {
     }
     user = await getUserWithId(user)
     if (!user) {
-      return res.status(INVALID_TOKEN).send(wrapper(tokenError.invalid))
+      return res
+        .status(INVALID_TOKEN)
+        .send(errorMessageWrapper(tokenError.invalid))
     }
     if (user.status !== 'active') {
       return res
         .status(FORBIDDEN_REQUEST)
-        .send(wrapper(userError.InvalidAccount))
+        .send(errorMessageWrapper(userError.InvalidAccount))
     }
     req.user = user
     // console.log(req.user)

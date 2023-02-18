@@ -1,7 +1,7 @@
 import fs from 'fs'
 import mime from 'mime'
 import { uid } from 'uid'
-import { wrapper } from '../errorResponses'
+import { errorMessageWrapper } from '../errorResponses'
 import { sendMailServices } from '../services/mail.services'
 import { BAD_REQUEST, OK } from '../statusCodes'
 
@@ -42,7 +42,7 @@ export const sendMail = async (req, res) => {
   const result = await sendMailServices(msg)
 
   if (result !== 'success') {
-    return res.status(BAD_REQUEST).send(wrapper('mail send failed'))
+    return res.status(BAD_REQUEST).send(errorMessageWrapper('mail send failed'))
   }
   res.status(OK).send({ msg: 'success' })
 }

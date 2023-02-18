@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator'
-import { userError, userMessage, wrapper } from '../errorResponses'
+import { errorMessageWrapper, userError, userMessage } from '../errorResponses'
 import { createUser, getUserWithEmail } from '../services/user.services'
 import { BAD_REQUEST, OK } from '../statusCodes'
 
@@ -12,7 +12,7 @@ export const AddStaffs = async (req, res) => {
     const isUser = await getUserWithEmail(email)
 
     if (isUser) {
-      res.status(BAD_REQUEST).send(wrapper(userError.exists))
+      res.status(BAD_REQUEST).send(errorMessageWrapper(userError.exists))
     } else {
       await createUser(name, email, password, type)
     }

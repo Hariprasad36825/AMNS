@@ -1,4 +1,9 @@
-export const wrapper = (message) => ({ errors: [{ message }] })
+export const errorMessageWrapper = (message) => ({ errors: [{ message }] })
+export const successMessageWrapper = (message) => ({ message })
+
+export const resourseMessages = {
+  notFound: 'Resource not found'
+}
 
 export const userError = {
   exists: 'Email already exists',
@@ -12,6 +17,11 @@ export const userMessage = {
 
 export const NotificationMessage = {
   created: 'Notification inserted successfully'
+}
+
+export const PostMessage = {
+  created: 'post created successfully',
+  error: 'something went wrong'
 }
 
 export const LocationMessage = {

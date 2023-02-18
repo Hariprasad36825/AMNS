@@ -5,6 +5,7 @@ import fs from 'fs'
 import { findBestMatch } from 'string-similarity'
 import { convertDate } from '../utils/dateConverter'
 import { importStudents } from '../services/student.services'
+import { errorMessageWrapper } from '../errorResponses'
 
 function isObject(obj) {
   return obj != null && obj.constructor.name === 'Object'
@@ -95,7 +96,9 @@ export const generateJSON = async (req, res) => {
     return res.status(200).json({ success: true, message })
   } catch (err) {
     console.log(err)
-    return res.status(500).json({ success: false, message: err.message })
+    return res
+      .status(400)
+      .json(errorMessageWrapper({ success: false, message: err.message }))
   }
 }
 
@@ -143,11 +146,14 @@ export const saveExcelData = async (req, res) => {
     }
   })
 
-  const ans = await importStudents(transformedDoc)
-
-  return res.status(200).json({
-    success: true,
-    errorDocs: ans.errorDocs,
-    savedDocs: ans.count
-  })
+  try {
+    const ans = await importStudents(transformedDoc)
+    return res.status(200).json({
+      success: true,
+      errorDocs: ans.errorDocs,
+      savedDocs: ans.count
+    })
+  } catch (err) {
+    return res.status(400).json(errorMessageWrapper({ message: err }))
+  }
 }

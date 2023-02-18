@@ -1,8 +1,13 @@
+import { NOTFOUND } from 'dns'
 import { validationResult } from 'express-validator'
 import fs from 'fs'
 import path from 'path'
 import { upload } from '../config/storage.config'
-import { userError, wrapper } from '../errorResponses'
+import {
+  errorMessageWrapper,
+  resourseMessages,
+  userError
+} from '../errorResponses'
 import {
   getStaffProfile,
   getStaffProfilePublicView
@@ -25,7 +30,7 @@ export const registerUser = async (req, res) => {
   validationResult(req).throw()
   const { email, name, password, type } = req.body
   if (await getUserWithEmail(email)) {
-    res.status(BAD_REQUEST).send(wrapper(userError.exists))
+    res.status(BAD_REQUEST).send(errorMessageWrapper(userError.exists))
   } else {
     const user = await createUser(name, email, password, type)
     res.status(CREATION_SUCCESSFULL).send(
@@ -44,13 +49,13 @@ export const loginUser = async (req, res) => {
   const user = await getUserWithEmail(email)
 
   if (!user) {
-    return res.status(BAD_REQUEST).send(wrapper(userError.invalid))
+    return res.status(BAD_REQUEST).send(errorMessageWrapper(userError.invalid))
   }
 
   const canLogin = await comparePassword(password, user)
 
   if (!canLogin) {
-    return res.status(BAD_REQUEST).send(wrapper(userError.invalid))
+    return res.status(BAD_REQUEST).send(errorMessageWrapper(userError.invalid))
   }
   res.status(CREATION_SUCCESSFULL).send(
     createToken({
@@ -117,4 +122,14 @@ export const deleteFile = (req, res) => {
   const filePath = path.join(process.cwd(), 'uploads', fileName)
   fs.unlinkSync(filePath)
   res.status(ACCEPTED).send({ msg: 'Deleted Successfully' })
+}
+
+export const getFileUrl = (req, res) => {
+  const fileName = req.params.fileName
+  const filePath = path.join(process.cwd(), 'uploads', fileName)
+
+  if (fs.existsSync(filePath)) {
+    return res.status(OK).send(new URL(`file:///${filePath}`).href)
+  }
+  res.status(NOTFOUND).send(errorMessageWrapper(resourseMessages.notFound))
 }
