@@ -15,7 +15,7 @@ export const properStaffData = [
       phone: '9090909090'
     },
     work_exp: {
-      department_name: 'CSE',
+      department_name: 'cse',
       designation: 'Professor'
     }
   },
@@ -28,7 +28,7 @@ export const properStaffData = [
       phone: '9090909090'
     },
     work_exp: {
-      department_name: 'CSE',
+      department_name: 'cse',
       designation: 'Professor'
     }
   },
@@ -57,7 +57,7 @@ export const InvalidStaffData = [
       phone: '9090909090'
     },
     work_exp: {
-      department_name: 'CSE',
+      department_name: 'cse',
       designation: 'Professor'
     }
   },
@@ -69,7 +69,7 @@ export const InvalidStaffData = [
       phone: '9090909090'
     },
     work_exp: {
-      department_name: 'CSE',
+      department_name: 'cse',
       designation: 'Professor'
     }
   },

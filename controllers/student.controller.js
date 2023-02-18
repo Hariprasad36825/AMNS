@@ -36,6 +36,8 @@ export const exportStudents = async (req, res) => {
   const mappings = req.body.mappings
   const rawData = await getAllStudents(searchStr, filters, Number.MAX_VALUE, 0)
 
+  console.log(rawData)
+
   if (
     searchStr.length <= 0 ||
     format.length <= 0 ||

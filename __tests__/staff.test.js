@@ -154,7 +154,7 @@ describe('POST api/staff get staff', () => {
     const body = {
       searchStr: 'staff',
       filter: {
-        'academics.department_name': ['CSE', 'IT']
+        'academics.department_name': ['cse', 'it']
       }
     }
     const res = await request
@@ -169,7 +169,7 @@ describe('POST api/staff get staff', () => {
   it('without search string', async () => {
     const body = {
       filter: {
-        'academics.department_name': ['CSE', 'IT'],
+        'academics.department_name': ['cse', 'it'],
         skills: ['c']
       }
     }

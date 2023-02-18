@@ -136,7 +136,7 @@ describe('GET for all Filter Data', () => {
         .post('/api/department')
         .set('Authorization', `Bearer ${token}`)
         .set('Content-type', 'application/json')
-        .send({ department: 'CSE' })
+        .send({ department: 'cse' })
       expect(res.status).toBe(OK)
       expect(res.body.message).toBe(DepartmentMessage.added)
     })

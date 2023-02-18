@@ -53,20 +53,20 @@ const staffSchema = new Schema({
     department_name: {
       type: String,
       enum: [
-        'AE',
-        'AUE',
-        'BT',
-        'CSE',
-        'CE',
-        'EEE',
-        'ECE',
-        'EIE',
-        'FT',
-        'ISE',
-        'IT',
-        'ME',
-        'MCE',
-        'TT'
+        'ae',
+        'aue',
+        'bt',
+        'cse',
+        'ce',
+        'eee',
+        'ece',
+        'eie',
+        'ft',
+        'ise',
+        'it',
+        'me',
+        'mce',
+        'tt'
       ]
     },
     designation: {

@@ -32,8 +32,6 @@ describe('POST /api/student/addstudents', () => {
       .post('/api/student/addstudents')
       .set('Authorization', `Bearer ${jwtTokenStaff}`)
       .send(body)
-    console.log(res.data)
-    console.log(res.data)
     expect(res.status).toBe(CREATION_SUCCESSFULL)
     expect(res.body).toBeDefined()
   })
@@ -91,7 +89,7 @@ describe('POST api/student get students', () => {
     const body = {
       searchStr: 'd',
       filter: {
-        'academics.department_name': ['CSE', 'IT'],
+        'academics.department_name': ['cse', 'it'],
         skills: ['c']
       }
     }
@@ -107,7 +105,7 @@ describe('POST api/student get students', () => {
   it('without search string', async () => {
     const body = {
       filter: {
-        'academics.department_name': ['CSE', 'IT'],
+        'academics.department_name': ['cse', 'it'],
         skills: ['c']
       }
     }
@@ -219,7 +217,7 @@ describe('POST /api/student/exportData', () => {
   it('correct details for xlsx', async () => {
     const body = {
       searchStr: 'd',
-      filter: { 'academics.department_name': ['CSE', 'IT'] },
+      filter: { 'academics.department_name': ['cse', 'it'] },
       format: 'xlsx',
       mappings: {
         name: 'personal_info.name',
