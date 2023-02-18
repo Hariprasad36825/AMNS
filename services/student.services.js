@@ -7,6 +7,21 @@ export const createStudent = async (students) => {
   await StudentModel.insertMany(students)
 }
 
+export const importStudents = async (students) => {
+  let count = 0
+  const errorDocs = []
+  for (const student of students) {
+    const newStudent = new StudentModel(student)
+    try {
+      await newStudent.save()
+      count++
+    } catch (err) {
+      errorDocs.push(student)
+    }
+  }
+  return { count, errorDocs }
+}
+
 export const getPersonalProfile = async (studentId) => {
   return await StudentModel.find(
     { user_id: studentId },

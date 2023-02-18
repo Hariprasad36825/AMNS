@@ -1,4 +1,5 @@
 import { validationResult } from 'express-validator'
+import { exportError, wrapper } from '../errorResponses'
 import {
   getAllStudents,
   getDefaultColumns,
@@ -41,13 +42,13 @@ export const exportStudents = async (req, res) => {
     Object.keys(mappings) <= 0 ||
     rawData.length <= 0
   ) {
-    res.status(BAD_REQUEST).send({ msg: 'export failed' })
+    res.status(BAD_REQUEST).send(wrapper(exportError))
   } else if (format === 'pdf') {
     await getPdf(searchStr, filters, rawData, mappings, res)
   } else if (format === 'xlsx') {
     res.status(OK).send(await getXLSX(searchStr, filters, rawData, mappings))
   } else {
-    res.status(BAD_REQUEST).send({ msg: 'wrong format' })
+    res.status(BAD_REQUEST).send(wrapper(exportError))
   }
 }
 

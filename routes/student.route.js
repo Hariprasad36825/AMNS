@@ -51,11 +51,11 @@ studentRouter.post(
       errorMessage: 'only email is allowed',
       optional: { options: { nullable: true } }
     },
-    'data.*.personal_info.phone': {
-      isMobilePhone: true,
-      errorMessage: 'only phonenumber is allowed',
-      optional: { options: { nullable: true } }
-    },
+    // 'data.*.personal_info.phone': {
+    //   isMobilePhone: true,
+    //   errorMessage: 'only phonenumber is allowed',
+    //   optional: { options: { nullable: true } }
+    // },
 
     'data.*.personal_info.location': {
       isAlpha: true,
@@ -92,20 +92,20 @@ studentRouter.post(
       isIn: {
         options: [
           [
-            'AE',
-            'AUE',
-            'BT',
-            'CSE',
-            'CE',
-            'EEE',
-            'ECE',
-            'EIE',
-            'FT',
-            'ISE',
-            'IT',
-            'ME',
-            'MCE',
-            'TT'
+            'ae',
+            'aue',
+            'bt',
+            'cse',
+            'ce',
+            'eee',
+            'eee',
+            'eie',
+            'ft',
+            'ise',
+            'it',
+            'me',
+            'mce',
+            'tt'
           ]
         ],
         errorMessage: 'Invalid role'

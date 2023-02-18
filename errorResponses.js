@@ -36,3 +36,7 @@ export const tokenError = {
   expired: 'Token expired',
   notAuthorised: "you don't have previleges to perform operation"
 }
+
+export const exportError = {
+  failed: 'export failed'
+}

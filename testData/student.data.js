@@ -104,7 +104,7 @@ export const studentData1 = {
         email: 'hariprasad36825@gmail.com',
         bio: 'biggest mf of all time',
         location: 'fs',
-        phone: [1234567890, 9944751873]
+        phone: '1234567890,9944751873'
       },
       skills: ['cpp', 'c'],
       work_exp: {
@@ -118,7 +118,7 @@ export const studentData1 = {
         Advisor_name: 'dsada'
       },
       academics: {
-        department_name: 'CSE',
+        department_name: 'cse',
         year: 2019
       },
       social_links: {
@@ -141,7 +141,7 @@ export const studentData1 = {
         Advisor_name: 'staff'
       },
       academics: {
-        department_name: 'IT',
+        department_name: 'it',
         year: 2019
       },
       skills: ['cpp', 'c']

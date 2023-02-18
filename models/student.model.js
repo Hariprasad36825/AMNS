@@ -21,14 +21,7 @@ const studentSchema = new Schema({
     roll_no: {
       type: String,
       required: true,
-      unique: true,
-      validate: {
-        validator: function (val) {
-          const re = /\d{2}[a-z]{3}\d{3}/gim
-          return re.test(val)
-        },
-        message: (props) => `${props.value} is not a valid roll number.`
-      }
+      unique: true
     },
     birthday: {
       type: Date
@@ -41,6 +34,7 @@ const studentSchema = new Schema({
       type: String,
       required: true,
       lowercase: true,
+      unique: true,
       validate: {
         validator: function (val) {
           const re = /(@kct\.ac\.in)$/gim
@@ -50,8 +44,8 @@ const studentSchema = new Schema({
       }
     },
     phone: {
-      type: [String],
-      default: []
+      type: String,
+      default: undefined
     },
     location: {
       type: String
@@ -98,20 +92,20 @@ const studentSchema = new Schema({
     department_name: {
       type: String,
       enum: [
-        'AE',
-        'AUE',
-        'BT',
-        'CSE',
-        'CE',
-        'EEE',
-        'ECE',
-        'EIE',
-        'FT',
-        'ISE',
-        'IT',
-        'ME',
-        'MCE',
-        'TT'
+        'ae',
+        'aue',
+        'bt',
+        'cse',
+        'ce',
+        'eee',
+        'ece',
+        'eie',
+        'ft',
+        'ise',
+        'it',
+        'me',
+        'mce',
+        'tt'
       ]
     },
     achievements: {

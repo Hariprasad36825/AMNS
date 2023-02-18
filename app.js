@@ -16,6 +16,7 @@ import {
   LocationRouter,
   SkillsRouter
 } from './routes/getData.route'
+import ImportRouter from './routes/import.route'
 import loginRouter from './routes/login.route'
 import { mailRouter } from './routes/mail.route'
 import NotificationRouter from './routes/notification.route'
@@ -82,6 +83,7 @@ app.use('/api/removefile', uploadRouter)
 
 app.use('/api/sendmail', mailRouter)
 app.use('/api/notification', NotificationRouter)
+app.use('/api/import', ImportRouter)
 // error handlers
 app.use(handleValidationError)
 app.use(handleMongooseError)
