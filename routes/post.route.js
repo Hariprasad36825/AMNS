@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { body } from 'express-validator'
-import { create, index } from '../controllers/post.controller'
+import { create, getTags, index } from '../controllers/post.controller'
 import { isAuthorised } from '../middleware/auth.middleware'
 import wrapAsync from '../utils/wrapAsync'
 
@@ -19,4 +19,8 @@ postRouter.post(
 
 postRouter.get('', isAuthorised(), (req, res, next) => {
   wrapAsync(index, req, res, next)
+})
+
+postRouter.post('/tags', isAuthorised(), (req, res, next) => {
+  wrapAsync(getTags, req, res, next)
 })
