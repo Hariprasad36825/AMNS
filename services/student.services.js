@@ -24,15 +24,15 @@ export const importStudents = async (students) => {
 
 export const getPersonalProfile = async (studentId) => {
   return await StudentModel.find(
-    { user_id: studentId },
+    { _id: studentId },
     {
       __v: 0,
       _id: 0,
-      user_id: 0,
       'advisor._id': 0
     }
   )
 }
+
 export const getStudentProfilePublicView = async (studentId) => {
   return await StudentModel.find(
     { user_id: studentId },

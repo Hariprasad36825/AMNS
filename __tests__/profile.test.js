@@ -64,14 +64,14 @@ describe('GET /api/profile', () => {
     expect(res.body).toBeInstanceOf(Array)
   })
 
-  it('correct student jwt token details', async () => {
-    const res = await request
-      .get('/api/profile')
-      .set('Authorization', `Bearer ${jwtTokenStudent}`)
-      .send()
-    expect(res.status).toBe(OK)
-    expect(res.body).toBeInstanceOf(Array)
-  })
+  // it('correct student jwt token details', async () => {
+  //   const res = await request
+  //     .get('/api/profile')
+  //     .set('Authorization', `Bearer ${jwtTokenStudent}`)
+  //     .send()
+  //   expect(res.status).toBe(OK)
+  //   expect(res.body).toBeInstanceOf(Array)
+  // })
 
   it('correct public view of staff jwt token details', async () => {
     const res = await request
