@@ -38,6 +38,7 @@ app.use(
   })
 )
 app.use(upload.any())
+app.use(express.static('uploads'))
 
 // Cors Configuration
 app.use((req, res, next) => {
