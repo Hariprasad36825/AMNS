@@ -21,7 +21,7 @@ export const getStaffProfile = async (staffId) => {
 
 export const getStaffProfilePublicView = async (staffId) => {
   return await StaffModel.find(
-    { user_id: staffId },
+    { _id: staffId },
     {
       __v: 0,
       _id: 0,

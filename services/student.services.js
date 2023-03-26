@@ -1,4 +1,5 @@
 import excelJS from 'exceljs'
+import mongoose from 'mongoose'
 import { appLogo } from '../config/index'
 import { StudentModel } from '../models/student.model'
 import PDFDocument from '../utils/pdfKitTables'
@@ -34,8 +35,10 @@ export const getPersonalProfile = async (studentId) => {
 }
 
 export const getStudentProfilePublicView = async (studentId) => {
-  return await StudentModel.find(
-    { user_id: studentId },
+  const objectId = mongoose.Types.ObjectId(studentId)
+
+  const ans = await StudentModel.find(
+    { _id: objectId },
     {
       __v: 0,
       _id: 0,
@@ -48,6 +51,10 @@ export const getStudentProfilePublicView = async (studentId) => {
       advisor: 0
     }
   )
+
+  console.log(ans)
+
+  return ans
 }
 
 export const upsertStudents = async (docs) => {

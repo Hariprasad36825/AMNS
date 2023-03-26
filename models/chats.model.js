@@ -1,13 +1,14 @@
 import { Schema, model } from 'mongoose'
+import findOrCreatePlugin from '../node_modules/mongoose-findorcreate/index'
 import { UserModel } from './user.model'
 
 const chatsSchema = new Schema({
   _id: { type: String, required: true },
-  room_name: { type: String, required: true },
+  room_name: { type: String },
   members: [{ type: Schema.Types.ObjectId, ref: UserModel }],
   messages: [
     {
-      author: String,
+      author: { type: Schema.Types.ObjectId, ref: UserModel },
       timestamp: { type: Date, default: Date.now },
       message: String,
       media: String
@@ -15,6 +16,7 @@ const chatsSchema = new Schema({
   ]
 })
 
+chatsSchema.plugin(findOrCreatePlugin)
 export const ChatsModel = model('Chats', chatsSchema)
 
 // incase of problem for future use

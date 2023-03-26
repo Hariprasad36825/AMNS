@@ -50,3 +50,12 @@ export const tokenError = {
 export const exportError = {
   failed: 'export failed'
 }
+
+export const commentMessage = {
+  created: 'comment created successfully',
+  error: 'Something went wrong'
+}
+
+export const roomMessage = {
+  error: 'Something went wrong'
+}

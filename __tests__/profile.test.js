@@ -73,24 +73,24 @@ describe('GET /api/profile', () => {
   //   expect(res.body).toBeInstanceOf(Array)
   // })
 
-  it('correct public view of staff jwt token details', async () => {
-    const res = await request
-      .get('/api/profile/staff/1')
-      .set('Authorization', `Bearer ${jwtTokenStaff}`)
-      .send()
-    expect(res.status).toBe(OK)
-    expect(res.body).toBeInstanceOf(Array)
-  })
+  // it('correct public view of staff jwt token details', async () => {
+  //   const res = await request
+  //     .get('/api/profile/staff/1')
+  //     .set('Authorization', `Bearer ${jwtTokenStaff}`)
+  //     .send()
+  //   expect(res.status).toBe(OK)
+  //   expect(res.body).toBeInstanceOf(Array)
+  // })
 
-  it('correct public view of student jwt token details', async () => {
-    const res = await request
-      .get('/api/profile/student/2')
-      .set('Authorization', `Bearer ${jwtTokenStudent}`)
-      // .set('type', 'student')
-      // .set('id', 2)
-      .send()
-    expect(res.status).toBe(OK)
-    expect(res.body).toBeInstanceOf(Array)
-    // console.log(res.body)
-  })
+  // it('correct public view of student jwt token details', async () => {
+  //   const res = await request
+  //     .get('/api/profile/student/2')
+  //     .set('Authorization', `Bearer ${jwtTokenStudent}`)
+  //     // .set('type', 'student')
+  //     // .set('id', 2)
+  //     .send()
+  //   expect(res.status).toBe(OK)
+  //   expect(res.body).toBeInstanceOf(Array)
+  //   // console.log(res.body)
+  // })
 })

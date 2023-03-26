@@ -83,6 +83,7 @@ export const getProfile = async (req, res) => {
 export const getProfilePublicView = async (req, res) => {
   const type = req.params.type
   const _id = req.params.id
+
   if (type === 'staff') {
     res.status(OK).send(await getStaffProfilePublicView(_id))
   } else if (type === 'student') {

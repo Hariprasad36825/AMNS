@@ -4,7 +4,7 @@ export const createFormData = (file, body) => {
   if (file) {
     data.append('image', file)
   }
-  Object.keys(body).forEach(key => {
+  Object.keys(body).forEach((key) => {
     data.append(key, body[key])
   })
 
