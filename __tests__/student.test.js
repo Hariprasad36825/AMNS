@@ -29,7 +29,7 @@ describe('POST /api/student/addstudents', () => {
   it('correct details', async () => {
     const body = studentData1
     const res = await request
-      .post('/api/student/addstudents')
+      .post('/api/student')
       .set('Authorization', `Bearer ${jwtTokenStaff}`)
       .send(body)
     expect(res.status).toBe(CREATION_SUCCESS)
@@ -39,7 +39,7 @@ describe('POST /api/student/addstudents', () => {
   it('inCorrect details', async () => {
     const body = studentData
     const res = await request
-      .post('/api/student/addstudents')
+      .post('/api/student')
       .set('Authorization', `Bearer ${jwtTokenStaff}`)
       .send({ data: body })
 

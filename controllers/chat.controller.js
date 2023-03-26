@@ -4,7 +4,7 @@ import {
   successMessageWrapper
 } from '../errorResponses'
 import { addOrFindroom, findRoom, getRooms } from '../services/chat.services'
-import { BAD_REQUEST, CREATION_SUCCESSFULL, OK } from '../statusCodes'
+import { BAD_REQUEST, CREATION_SUCCESS, OK } from '../statusCodes'
 
 export const findOrcreate = async (req, res) => {
   const { roomName, members } = req.body
@@ -12,7 +12,7 @@ export const findOrcreate = async (req, res) => {
   const room = await addOrFindroom(roomName, members)
 
   if (room) {
-    return res.status(CREATION_SUCCESSFULL).send(successMessageWrapper(room))
+    return res.status(CREATION_SUCCESS).send(successMessageWrapper(room))
   }
 
   return res.status(BAD_REQUEST).send(errorMessageWrapper(roomMessage.error))

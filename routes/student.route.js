@@ -12,7 +12,7 @@ import wrapAsync from '../utils/wrapAsync'
 const studentRouter = Router()
 
 studentRouter.post(
-  '/addstudents',
+  '',
   isAuthorised(),
   checkSchema({
     data: {
@@ -32,7 +32,7 @@ studentRouter.post(
     },
     'data.*.personal_info.roll_no': {
       isAlphanumeric: true,
-      errorMessage: 'rollno should contain only alphanumeric characters'
+      errorMessage: 'roll-no should contain only alphanumeric characters'
     },
     'data.*.personal_info.birthday': {
       isDate: true,
@@ -82,10 +82,12 @@ studentRouter.post(
       optional: { options: { nullable: true } }
     },
     'data.*.advisor._id': {
-      isInt: true
+      isInt: true,
+      optional: { options: { nullable: true } }
     },
     'data.*.advisor.Advisor_name': {
-      isAlpha: true
+      isAlpha: true,
+      optional: { options: { nullable: true } }
     },
     'data.*.academics.department_name': {
       optional: { options: { nullable: true } },
