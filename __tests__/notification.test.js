@@ -1,14 +1,14 @@
 import { connectDB, disconnectDB } from '../config/db_config'
-import { createToken, createUser } from '../services/user.services'
-import { CREATION_SUCCESSFULL, INTERNAL_SERVER_ERROR, OK } from '../statusCodes'
-import { adminValid } from '../testData/user.data'
-import { sampleNotification, emptyArray } from '../testData/notification.data'
-import { request } from './app.test'
 import { NotificationMessage } from '../errorResponses'
 import {
   createNotification,
   createUserNotification
 } from '../services/notification.service'
+import { createToken, createUser } from '../services/user.services'
+import { CREATION_SUCCESS, INTERNAL_SERVER_ERROR, OK } from '../statusCodes'
+import { emptyArray, sampleNotification } from '../testData/notification.data'
+import { adminValid } from '../testData/user.data'
+import { request } from './app.test'
 
 describe('all request for api/notification', () => {
   let token, user
@@ -37,7 +37,7 @@ describe('all request for api/notification', () => {
         .set('Authorization', `Bearer ${token}`)
         .set('Content-type', 'application/json')
         .send(sampleNotification)
-      expect(res.status).toBe(CREATION_SUCCESSFULL)
+      expect(res.status).toBe(CREATION_SUCCESS)
       expect(res.body.message).toBe(NotificationMessage.created)
     })
     it('invalid notification with empty array', async () => {

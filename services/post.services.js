@@ -5,5 +5,5 @@ export const addPost = async (body) => {
 }
 
 export const getPost = async () => {
-  return await PostModel.find().populate('user', { name: 1 })
+  return await PostModel.find().populate('user', { name: 1, profilePic: 1 })
 }

@@ -3,7 +3,7 @@ import { tokenError, userError } from '../errorResponses'
 import { createToken, createUser } from '../services/user.services'
 import {
   BAD_REQUEST,
-  CREATION_SUCCESSFULL,
+  CREATION_SUCCESS,
   INTERNAL_SERVER_ERROR,
   INVALID_TOKEN,
   OK
@@ -30,7 +30,7 @@ describe('POST api/register', () => {
       .post('/api/register')
       .set('Content-type', 'application/json')
       .send(body)
-    expect(res.status).toBe(CREATION_SUCCESSFULL)
+    expect(res.status).toBe(CREATION_SUCCESS)
     expect(res.body).toBeDefined()
   })
   it('no user details in body', async () => {
@@ -103,7 +103,7 @@ describe('POST api/login', () => {
       .post('/api/login')
       .set('Content-type', 'application/json')
       .send(body)
-    expect(res.status).toBe(CREATION_SUCCESSFULL)
+    expect(res.status).toBe(CREATION_SUCCESS)
     expect(res.body).toBeDefined()
   })
   it('login with incorrect password', async () => {

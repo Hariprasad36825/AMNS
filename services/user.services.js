@@ -1,10 +1,11 @@
 import bcrypt from 'bcryptjs'
+import { StaffModel } from '../models/staff.model'
+import { StudentModel } from '../models/student.model'
 
 import { UserModel } from '../models/user.model'
 import { createAuthToken, createRefreshToken } from './token.services'
 
 export const getUserWithEmail = async (email) => {
-  // console.log(email)
   return await UserModel.findOne({ username: email })
 }
 
@@ -22,7 +23,19 @@ export const createUser = async (name, username, password, type) => {
   const salt = await bcrypt.genSalt(10)
   user.password = await bcrypt.hash(password, salt)
   await user.save()
-
+  if (type === 'staff') {
+    const staff = await StaffModel.findOrCreate({
+      'personal_info.email': username
+    })
+    staff.doc.user_id = user.id
+    staff.doc.save()
+  } else if (type !== 'admin') {
+    const student = await StudentModel.findOrCreate({
+      'personal_info.email': username
+    })
+    student.doc.user_id = user.id
+    student.doc.save()
+  }
   return user
 }
 

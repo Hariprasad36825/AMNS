@@ -6,7 +6,7 @@ import {
   getUserNotifications,
   markRead
 } from '../services/notification.service'
-import { CREATION_SUCCESSFULL, OK } from '../statusCodes'
+import { CREATION_SUCCESS, OK } from '../statusCodes'
 
 export const addNotification = async (req, res) => {
   validationResult(req).throw()
@@ -15,9 +15,7 @@ export const addNotification = async (req, res) => {
   const notification = await createNotification(req.body)
 
   await createUserNotification(user, notification)
-  res
-    .status(CREATION_SUCCESSFULL)
-    .send({ message: NotificationMessage.created })
+  res.status(CREATION_SUCCESS).send({ message: NotificationMessage.created })
 }
 
 export const getNotification = async (req, res) => {

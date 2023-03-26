@@ -3,13 +3,13 @@ import { userError } from '../errorResponses'
 import {
   getAllStaffs,
   getDefaultColumns,
+  getPdf,
   getStaffColumns,
   getStudentOfStaff,
-  upsertStaffs,
-  getPdf,
-  getXLSX
+  getXLSX,
+  upsertStaffs
 } from '../services/staff.services'
-import { BAD_REQUEST, CREATION_SUCCESSFULL, OK } from '../statusCodes'
+import { BAD_REQUEST, CREATION_SUCCESS, OK } from '../statusCodes'
 
 export const getStudentListUnderStaff = async (req, res) => {
   const staffID = req.user?._id
@@ -20,7 +20,7 @@ export const getStudentListUnderStaff = async (req, res) => {
 export const addStaff = async (req, res) => {
   validationResult(req).throw()
   if (await upsertStaffs(req.body.data)) {
-    res.status(CREATION_SUCCESSFULL).send({ msg: 'success' })
+    res.status(CREATION_SUCCESS).send({ msg: 'success' })
   } else {
     res.status(BAD_REQUEST).send({ msg: 'Insertion Failed' })
   }

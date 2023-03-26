@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose'
+import findOrCreatePlugin from 'mongoose-findorcreate'
 import { UserModel } from './user.model'
 
 const studentSchema = new Schema({
@@ -20,7 +21,7 @@ const studentSchema = new Schema({
     },
     roll_no: {
       type: String,
-      required: true,
+      // required: true,
       unique: true
     },
     birthday: {
@@ -148,5 +149,7 @@ studentSchema.index(
     }
   }
 )
+
+studentSchema.plugin(findOrCreatePlugin)
 
 export const StudentModel = model('Student', studentSchema)

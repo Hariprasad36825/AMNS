@@ -1,7 +1,7 @@
 import { connectDB, disconnectDB } from '../config/db_config'
 import { addPost } from '../services/post.services'
 import { createToken, createUser } from '../services/user.services'
-import { BAD_REQUEST, CREATION_SUCCESSFULL, OK } from '../statusCodes'
+import { BAD_REQUEST, CREATION_SUCCESS, OK } from '../statusCodes'
 import { invalidData, postDataValid } from '../testData/post.data'
 import { studentValid1 } from '../testData/user.data'
 import { request } from './app.test'
@@ -33,7 +33,7 @@ describe('all /api/post', () => {
         .set('Authorization', `Bearer ${token}`)
         .set('Content-type', 'application/json')
         .send(postDataValid)
-      expect(res.status).toBe(CREATION_SUCCESSFULL)
+      expect(res.status).toBe(CREATION_SUCCESS)
     })
 
     it('missing feilds', async () => {

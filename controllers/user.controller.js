@@ -24,7 +24,7 @@ import {
   getUserWithEmail,
   getUserWithId
 } from '../services/user.services'
-import { ACCEPTED, BAD_REQUEST, CREATION_SUCCESSFULL, OK } from '../statusCodes'
+import { ACCEPTED, BAD_REQUEST, CREATION_SUCCESS, OK } from '../statusCodes'
 
 export const registerUser = async (req, res) => {
   validationResult(req).throw()
@@ -33,7 +33,7 @@ export const registerUser = async (req, res) => {
     res.status(BAD_REQUEST).send(errorMessageWrapper(userError.exists))
   } else {
     const user = await createUser(name, email, password, type)
-    res.status(CREATION_SUCCESSFULL).send(
+    res.status(CREATION_SUCCESS).send(
       createToken({
         _id: user._id.toString(),
         type: user.type
@@ -57,7 +57,7 @@ export const loginUser = async (req, res) => {
   if (!canLogin) {
     return res.status(BAD_REQUEST).send(errorMessageWrapper(userError.invalid))
   }
-  res.status(CREATION_SUCCESSFULL).send(
+  res.status(CREATION_SUCCESS).send(
     createToken({
       _id: user._id.toString(),
       type: user.type
@@ -100,7 +100,6 @@ export const GetAccessToken = async (req, res) => {
 }
 
 export const uploadFiles = async (req, res) => {
-  // console.log("🚀 ~ file: user.controller.js ~ line 105 ~ upload.single ~ req.files", req.files)
   if (!req.files) {
     res.status(BAD_REQUEST).send({ msg: 'No files found' })
   }

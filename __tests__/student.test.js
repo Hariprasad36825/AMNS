@@ -1,7 +1,7 @@
 import { connectDB, disconnectDB } from '../config/db_config'
 import { upsertStudents } from '../services/student.services'
 import { createToken, createUser } from '../services/user.services'
-import { BAD_REQUEST, CREATION_SUCCESSFULL, DB_ERROR, OK } from '../statusCodes'
+import { BAD_REQUEST, CREATION_SUCCESS, DB_ERROR, OK } from '../statusCodes'
 import { staff1 } from '../testData/staff.data'
 import { studentData, studentData1 } from '../testData/student.data'
 import { adminValid } from '../testData/user.data'
@@ -32,7 +32,7 @@ describe('POST /api/student/addstudents', () => {
       .post('/api/student/addstudents')
       .set('Authorization', `Bearer ${jwtTokenStaff}`)
       .send(body)
-    expect(res.status).toBe(CREATION_SUCCESSFULL)
+    expect(res.status).toBe(CREATION_SUCCESS)
     expect(res.body).toBeDefined()
   })
 
@@ -62,7 +62,7 @@ describe('POST api/student get students', () => {
         _id: user._id.toString(),
         type: user.type
       }).AccessToken
-      // console.log("🚀 ~ file: student.test.js:69 ~ beforeAll ~ studentData1.data", studentData1.data)
+
       await upsertStudents(studentData1.data)
     } catch (err) {
       console.error('err>>', err)

@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose'
+import findOrCreatePlugin from 'mongoose-findorcreate'
 import { UserModel } from './user.model'
 
 const staffSchema = new Schema({
@@ -110,5 +111,7 @@ staffSchema.index(
     }
   }
 )
+
+staffSchema.plugin(findOrCreatePlugin)
 
 export const StaffModel = model('Staff', staffSchema)

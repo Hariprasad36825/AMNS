@@ -60,8 +60,6 @@ if (process.env.NODE_ENV === 'test') {
   app.use(cors({ origin: true, credentials: true }))
 }
 
-// console.log(process.cwd())
-
 // routes
 app.get('', function (req, res) {
   return res.status(200).send('ok')

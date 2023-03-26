@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator'
-import { exportError, errorMessageWrapper } from '../errorResponses'
+import { errorMessageWrapper, exportError } from '../errorResponses'
 import {
   getAllStudents,
   getDefaultColumns,
@@ -8,12 +8,12 @@ import {
   getXLSX,
   upsertStudents
 } from '../services/student.services'
-import { BAD_REQUEST, CREATION_SUCCESSFULL, OK } from '../statusCodes'
+import { BAD_REQUEST, CREATION_SUCCESS, OK } from '../statusCodes'
 
 export const addStudents = async (req, res) => {
   validationResult(req).throw()
   if (await upsertStudents(req.body.data)) {
-    res.status(CREATION_SUCCESSFULL).send({ msg: 'success' })
+    res.status(CREATION_SUCCESS).send({ msg: 'success' })
   } else {
     res.status(BAD_REQUEST).send({ msg: 'Insertion Failed' })
   }

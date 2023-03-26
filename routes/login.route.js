@@ -13,6 +13,7 @@ loginRouter.post(
     /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/gim
   ),
   (req, res, next) => {
+    console.log('req')
     wrapAsync(loginUser, req, res, next)
   }
 )

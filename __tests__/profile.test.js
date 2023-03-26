@@ -4,11 +4,11 @@ import { upsertStudents } from '../services/student.services'
 import { createToken, createUser } from '../services/user.services'
 import { INVALID_TOKEN, OK } from '../statusCodes'
 import { properStaffData, staff1 } from '../testData/staff.data'
-import { student1, studentData } from '../testData/student.data'
+import { studentData } from '../testData/student.data'
 import { request } from './app.test'
 
 describe('GET /api/profile', () => {
-  let staff, student, jwtTokenStaff, jwtTokenStudent
+  let staff, jwtTokenStaff
   beforeAll(async () => {
     await connectDB()
     try {
@@ -18,21 +18,21 @@ describe('GET /api/profile', () => {
         staff1.password,
         staff1.type
       )
-      student = await createUser(
-        student1.name,
-        student1.email,
-        student1.password,
-        student1.type
-      )
+      // student = await createUser(
+      //   student1.name,
+      //   student1.email,
+      //   student1.password,
+      //   student1.type
+      // )
       //   console.log('----testing---')
       jwtTokenStaff = createToken({
         _id: staff._id.toString(),
         type: staff.type
       }).AccessToken
-      jwtTokenStudent = createToken({
-        _id: student._id.toString(),
-        type: student.type
-      }).AccessToken
+      // jwtTokenStudent = createToken({
+      //   _id: student._id.toString(),
+      //   type: student.type
+      // }).AccessToken
 
       await upsertStaffs(properStaffData)
       await upsertStudents(studentData)

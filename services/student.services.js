@@ -37,7 +37,7 @@ export const getPersonalProfile = async (studentId) => {
 export const getStudentProfilePublicView = async (studentId) => {
   const objectId = mongoose.Types.ObjectId(studentId)
 
-  const ans = await StudentModel.find(
+  const students = await StudentModel.find(
     { _id: objectId },
     {
       __v: 0,
@@ -52,9 +52,9 @@ export const getStudentProfilePublicView = async (studentId) => {
     }
   )
 
-  console.log(ans)
+  console.log(students)
 
-  return ans
+  return students
 }
 
 export const upsertStudents = async (docs) => {

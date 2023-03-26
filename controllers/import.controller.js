@@ -1,11 +1,11 @@
-import { BAD_REQUEST } from '../statusCodes'
-import { upload } from '../config/storage.config'
 import excelJS from 'exceljs'
 import fs from 'fs'
 import { findBestMatch } from 'string-similarity'
-import { convertDate } from '../utils/dateConverter'
-import { importStudents } from '../services/student.services'
+import { upload } from '../config/storage.config'
 import { errorMessageWrapper } from '../errorResponses'
+import { importStudents } from '../services/student.services'
+import { BAD_REQUEST } from '../statusCodes'
+import { convertDate } from '../utils/dateConverter'
 
 function isObject(obj) {
   return obj != null && obj.constructor.name === 'Object'
@@ -42,13 +42,13 @@ const convertXLSXtoJSON = (workbook, headerNumber) => {
 
 export const generateJSON = async (req, res) => {
   if (!req.files) {
-    res.status(BAD_REQUEST).send({ msg: 'No files found' })
+    res.status(BAD_REQUEST).send(errorMessageWrapper('No files found'))
   }
   try {
     const path = `uploads/${req.files[0].filename}`
     upload.single(req, res, (err) => {
       if (err) {
-        res.status(BAD_REQUEST).send({ msg: 'upload Failed' })
+        res.status(BAD_REQUEST).send(errorMessageWrapper('upload Failed'))
       }
     })
     const workbook = new excelJS.Workbook()
@@ -96,9 +96,7 @@ export const generateJSON = async (req, res) => {
     return res.status(200).json({ success: true, message })
   } catch (err) {
     console.log(err)
-    return res
-      .status(400)
-      .json(errorMessageWrapper({ success: false, message: err.message }))
+    return res.status(400).json(errorMessageWrapper(err.message))
   }
 }
 

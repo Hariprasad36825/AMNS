@@ -10,7 +10,7 @@ import {
 } from '../errorResponses'
 import { findComments, saveComment } from '../services/comment.services'
 import { addPost, getPost } from '../services/post.services'
-import { BAD_REQUEST, CREATION_SUCCESSFULL, OK } from '../statusCodes'
+import { BAD_REQUEST, CREATION_SUCCESS, OK } from '../statusCodes'
 import { createFormData } from '../utils/createFormData'
 
 export const create = async (req, res) => {
@@ -20,7 +20,7 @@ export const create = async (req, res) => {
 
   if (await addPost({ user, caption, tags, attachments })) {
     return res
-      .status(CREATION_SUCCESSFULL)
+      .status(CREATION_SUCCESS)
       .send(successMessageWrapper(PostMessage.created))
   }
   res.status(BAD_REQUEST).send(errorMessageWrapper(PostMessage.error))
@@ -68,7 +68,7 @@ export const addComment = async (req, res) => {
 
   if (await saveComment({ name, body, userId }, postId)) {
     return res
-      .status(CREATION_SUCCESSFULL)
+      .status(CREATION_SUCCESS)
       .send(successMessageWrapper(commentMessage.created))
   }
   res.status(BAD_REQUEST).send(errorMessageWrapper(commentMessage.error))

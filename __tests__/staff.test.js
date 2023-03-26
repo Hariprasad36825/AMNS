@@ -4,7 +4,7 @@ import { createStudent } from '../services/student.services'
 import { createToken, createUser } from '../services/user.services'
 import {
   BAD_REQUEST,
-  CREATION_SUCCESSFULL,
+  CREATION_SUCCESS,
   DB_ERROR,
   FORBIDDEN_REQUEST,
   OK
@@ -97,7 +97,7 @@ describe('POST /api/staff/addstaffs', () => {
       .set('Content-type', 'application/json')
       .send({ data: body })
 
-    expect(res.status).toBe(CREATION_SUCCESSFULL)
+    expect(res.status).toBe(CREATION_SUCCESS)
     expect(res.body).toBeDefined()
   })
 
@@ -127,7 +127,7 @@ describe('POST api/staff get staff', () => {
         _id: user._id.toString(),
         type: user.type
       }).AccessToken
-      // console.log("🚀 ~ file: staff.test.js:134 ~ beforeAll ~ properStaffData", properStaffData)
+
       await upsertStaffs(properStaffData)
     } catch (err) {
       console.error(err)
