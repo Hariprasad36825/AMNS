@@ -4,10 +4,10 @@ import { UserModel } from './user.model'
 
 const chatsSchema = new Schema({
   room_name: { type: String },
-  members: [{ type: Schema.Types.ObjectId, ref: UserModel }],
+  members: [{ type: Number, ref: UserModel }],
   messages: [
     {
-      author: { type: Schema.Types.ObjectId, ref: UserModel },
+      author: { type: Number, ref: UserModel },
       timestamp: { type: Date, default: Date.now },
       message: String,
       media: String
