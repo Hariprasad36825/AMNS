@@ -1,8 +1,10 @@
 import { ChatsModel } from '../models/chats.model'
 
 export const addOrFindroom = async (roomName, members) => {
+  console.log('adding room ' + roomName)
   const chatRoom = await ChatsModel.findOrCreate({ roomName, members })
 
+  console.log(chatRoom)
   return chatRoom
 }
 

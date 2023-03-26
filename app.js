@@ -9,6 +9,7 @@ import {
   handleValidationError
 } from './middleware/errorHandler.middleware'
 import adminRouter from './routes/admin.route'
+import chatRouter from './routes/chat.route'
 import {
   AdvisorRouter,
   CompanyRouter,
@@ -90,6 +91,7 @@ app.use('/api/notification', NotificationRouter)
 app.use('/api/import', ImportRouter)
 
 app.use('/api/posts', postRouter)
+app.use('/api/chats', chatRouter)
 
 // error handlers
 app.use(handleValidationError)

@@ -12,7 +12,7 @@ export const findOrcreate = async (req, res) => {
   const room = await addOrFindroom(roomName, members)
 
   if (room) {
-    return res.staus(CREATION_SUCCESSFULL).send(successMessageWrapper(room))
+    return res.status(CREATION_SUCCESSFULL).send(successMessageWrapper(room))
   }
 
   return res.status(BAD_REQUEST).send(errorMessageWrapper(roomMessage.error))

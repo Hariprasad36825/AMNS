@@ -3,7 +3,6 @@ import findOrCreatePlugin from '../node_modules/mongoose-findorcreate/index'
 import { UserModel } from './user.model'
 
 const chatsSchema = new Schema({
-  _id: { type: String, required: true },
   room_name: { type: String },
   members: [{ type: Schema.Types.ObjectId, ref: UserModel }],
   messages: [
