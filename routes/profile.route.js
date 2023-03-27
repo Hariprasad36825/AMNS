@@ -1,7 +1,8 @@
 import { Router } from 'express'
 import {
   getProfile,
-  getProfilePublicView
+  getProfilePublicView,
+  getUserDetails
 } from '../controllers/user.controller'
 import { isAuthorised } from '../middleware/auth.middleware'
 import wrapAsync from '../utils/wrapAsync'
@@ -14,6 +15,10 @@ profileRouter.get('/:type/:id', isAuthorised(), (req, res, next) => {
 
 profileRouter.get('/', isAuthorised(), (req, res, next) => {
   wrapAsync(getProfile, req, res, next)
+})
+
+profileRouter.get('/user', isAuthorised(), (req, res, next) => {
+  wrapAsync(getUserDetails, req, res, next)
 })
 
 export default profileRouter
