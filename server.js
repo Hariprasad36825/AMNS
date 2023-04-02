@@ -12,11 +12,15 @@ const HOST = '127.0.0.1'
 const httpServer = createServer(app)
 
 // socket initialization
-const io = new Server(httpServer)
+const io = new Server(httpServer, {
+  cors: {
+    origin: '*'
+  }
+})
 const commentsNamespace = io.of('/comments')
-commentsListener(commentsNamespace)
+commentsListener(commentsNamespace, io)
 const chatsNamespace = io.of('/chats')
-chatsListener(chatsNamespace)
+chatsListener(chatsNamespace, io)
 
 // App
 connectDB().then(() => {

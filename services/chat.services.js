@@ -1,7 +1,6 @@
 import { ChatsModel } from '../models/chats.model'
 
 export const findRoom = async (roomId) => {
-  console.log(roomId)
   const chatRoom = await ChatsModel.findById(roomId)
   return chatRoom
 }
@@ -22,7 +21,6 @@ export const saveMessage = async (roomId, message) => {
 }
 
 export const getRooms = async (userId) => {
-  console.log('getRooms', userId)
   const rooms = await ChatsModel.find({ members: userId })
     .populate({
       path: 'members',

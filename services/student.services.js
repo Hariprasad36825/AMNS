@@ -52,8 +52,6 @@ export const getStudentProfilePublicView = async (studentId) => {
     }
   )
 
-  console.log(students)
-
   return students
 }
 

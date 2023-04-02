@@ -1,6 +1,6 @@
 import { saveMessage } from '../../services/chat.services'
 
-export const chatsListener = (chatsNamespace) => {
+export const chatsListener = (chatsNamespace, io) => {
   /*
     chatsNamespace will emit connection as soon as a connection is established with the server.
   */
@@ -16,6 +16,7 @@ export const chatsListener = (chatsNamespace) => {
         console.log(
           `Client Namespace with id ${socket.id} disconnected due to ${reason}`
         )
+        socket.leave(socket.roomId)
       })
 
       /*
@@ -28,20 +29,26 @@ export const chatsListener = (chatsNamespace) => {
       /*
         Creating a room for all new users.
       */
-      socket.join(socket.data.roomId)
+      socket.on('setup_connection', async (data) => {
+        socket.join(data.roomId)
+        socket.roomId = data.roomId
+      })
 
-      socket.on('send_message', async (message) => {
-        const roomId = message.roomId
-        await saveMessage({
-          author: message.author,
-          message: message.body,
-          media: message.media
+      socket.on('send_message', async (data) => {
+        const isMessageSaved = await saveMessage(data.roomId, {
+          author: data.author,
+          message: data.body,
+          media: data.media
         })
 
-        socket.to(roomId).emit('receive_message', message)
+        console.log(socket.rooms)
+
+        if (isMessageSaved) {
+          chatsNamespace.emit('receive_message', isMessageSaved)
+        }
       })
     } catch (error) {
-      console.log(error?.stack)
+      console.log(error.stack)
     }
   })
 }
