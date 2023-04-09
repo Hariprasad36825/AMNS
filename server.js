@@ -25,5 +25,5 @@ chatsListener(chatsNamespace, io)
 // App
 connectDB().then(() => {
   httpServer.listen(PORT, HOST)
-  console.log('connection establised on 127.0.0.1:8080')
+  console.log('connection established on 127.0.0.1:8080')
 })

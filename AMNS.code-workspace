@@ -10,6 +10,7 @@
       "source.organizeImports": true
     },
     "editor.tabSize": 2,
-    "javascript.updateImportsOnFileMove.enabled": "prompt"
+    "javascript.updateImportsOnFileMove.enabled": "prompt",
+    "cSpell.words": ["addstudents"]
   }
 }
