@@ -2,6 +2,7 @@ export const CREATION_SUCCESS = 201
 export const ACCEPTED = 202
 export const OK = 200
 export const NO_CONTENT = 204
+export const NOT_ACCEPTED = 206
 
 export const NOT_FOUND = 404
 export const BAD_REQUEST = 400

@@ -8,9 +8,10 @@ import {
   PostMessage,
   successMessageWrapper
 } from '../errorResponses'
+import { PostModel } from '../models/post.model'
 import { findComments, saveComment } from '../services/comment.services'
-import { addPost, getPost } from '../services/post.services'
-import { BAD_REQUEST, CREATION_SUCCESS, OK } from '../statusCodes'
+import { addPost, getPost, getPosts } from '../services/post.services'
+import { BAD_REQUEST, CREATION_SUCCESS, NOT_ACCEPTED, OK } from '../statusCodes'
 import { createFormData } from '../utils/createFormData'
 
 export const create = async (req, res) => {
@@ -27,7 +28,7 @@ export const create = async (req, res) => {
 }
 
 export const index = async (req, res) => {
-  const posts = await getPost()
+  const posts = await getPosts()
   res.status(OK).send(posts)
 }
 
@@ -83,4 +84,21 @@ export const getComments = async (req, res) => {
     res.status(OK).send(successMessageWrapper(comments))
   }
   res.status(BAD_REQUEST).send(errorMessageWrapper(commentMessage.error))
+}
+
+export const likePost = async (req, res) => {
+  const postId = req.params.postId
+  const userId = req.user?._id
+
+  const post = await getPost(postId)
+
+  if (post) {
+    const isLiked = post.likes.includes(userId)
+
+    if (!isLiked) {
+      await PostModel.updateOne({ _id: postId }, { $push: { likes: userId } })
+      return res.status(OK).send(successMessageWrapper(PostMessage.liked))
+    }
+  }
+  res.status(NOT_ACCEPTED).send(errorMessageWrapper(PostMessage.liked_error))
 }

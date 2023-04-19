@@ -14,7 +14,7 @@ export const sendMail = async (req, res) => {
   if (files) {
     html = '<div>' + html
     Object.keys(files).map((file) => {
-      const pathToAttachment = process.cwd() + '\\uploads\\' + files[`${file}`]
+      const pathToAttachment = process.cwd() + '/uploads/' + files[`${file}`]
       const type = mime.getType(pathToAttachment)
       const id = uid()
 

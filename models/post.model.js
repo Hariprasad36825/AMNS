@@ -14,8 +14,7 @@ const postsSchema = new Schema({
   },
   user: {
     type: Number,
-    ref: UserModel,
-    autopopulate: true
+    ref: UserModel
   },
   caption: {
     type: String,
@@ -24,7 +23,7 @@ const postsSchema = new Schema({
   tags: [String],
   likes: [
     {
-      type: Schema.Types.ObjectId,
+      type: Number,
       ref: UserModel
     }
   ],

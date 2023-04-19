@@ -5,7 +5,8 @@ import {
   create,
   getComments,
   getTags,
-  index
+  index,
+  likePost
 } from '../controllers/post.controller'
 import { isAuthorised } from '../middleware/auth.middleware'
 import wrapAsync from '../utils/wrapAsync'
@@ -37,4 +38,8 @@ postRouter.post('/:postId/comments', isAuthorised(), (req, res, next) => {
 
 postRouter.get('/:postId/comments', isAuthorised(), (req, res, next) => {
   wrapAsync(getComments, req, res, next)
+})
+
+postRouter.post('/:postId/like', isAuthorised(), (req, res, next) => {
+  wrapAsync(likePost, req, res, next)
 })

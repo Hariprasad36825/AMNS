@@ -21,7 +21,9 @@ export const NotificationMessage = {
 
 export const PostMessage = {
   created: 'post created successfully',
-  error: 'something went wrong'
+  error: 'something went wrong',
+  liked: 'post liked successfully',
+  liked_error: 'post already liked'
 }
 
 export const LocationMessage = {
