@@ -1,13 +1,13 @@
-import app from './app'
-import { connectDB } from './config/db_config'
 import { createServer } from 'http'
 import { Server } from 'socket.io'
-import { commentsListener } from './sockets/listeners/commentsListener'
+import app from './app'
+import { connectDB } from './config/db_config'
 import { chatsListener } from './sockets/listeners/chatsListener'
+import { commentsListener } from './sockets/listeners/commentsListener'
 
 // Constants
 const PORT = 8080
-const HOST = '127.0.0.1'
+const HOST = '0.0.0.0'
 
 const httpServer = createServer(app)
 
